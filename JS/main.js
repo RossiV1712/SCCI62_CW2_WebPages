@@ -234,12 +234,12 @@ function ArticleModalOpen(i) {
     var ArticleModal = document.getElementById("ArticleModal"); // Store the Article modal element
     CloseSettingsModal(); // Run the function to close the settings modal (incase it is open)
     HideCards(); // Run the function to hide the article cards
-    var Title = ReturnedData.articles[i].title == null ? 'Unknown' : ReturnedData.articles[i].title; // For each piece of Returneddata check it is not null (if so output as 'Unknown' or replacement image) and then run format function if needed
-    var Source = ReturnedData.articles[i].source.name == null ? 'Unknown' : ReturnedData.articles[i].source.name;
-    var Desc = ReturnedData.articles[i].description == null ? 'Unknown' : ReturnedData.articles[i].description;
-    var Date = ReturnedData.articles[i].publishedAt == null ? 'Unknown' : FormatDate(ReturnedData.articles[i].publishedAt);
-    var ImageURL = ReturnedData.articles[i].urlToImage == null ? 'images/download.png' : CheckImage(ReturnedData.articles[i].urlToImage);
-    var URL = ReturnedData.articles[i].url == null ? 'Unknown' : ReturnedData.articles[i].url;
+    var Title = (ReturnedData.articles[i].title == null || ReturnedData.articles[i].title == "") ? 'Unknown' : ReturnedData.articles[i].title; // For each piece of Returneddata check it is not null or empty ("") and if so output as 'Unknown' or the replacement image, if not then run the format function if needed and store the required data
+    var Source = (ReturnedData.articles[i].source.name == null || ReturnedData.articles[i].source.name == "") ? 'Unknown' : ReturnedData.articles[i].source.name;
+    var Desc = (ReturnedData.articles[i].description == null || ReturnedData.articles[i].decription == "") ? 'Unknown' : ReturnedData.articles[i].description;
+    var Date = (ReturnedData.articles[i].publishedAt == null || ReturnedData.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(ReturnedData.articles[i].publishedAt);
+    var ImageURL = (ReturnedData.articles[i].urlToImage == null || ReturnedData.articles[i].urlToImage == "") ? 'images/download.png' : ReturnedData.articles[i].urlToImage;
+    var URL = (ReturnedData.articles[i].url == null || ReturnedData.articles[i].url == "") ? 'Unknown' : ReturnedData.articles[i].url;
     document.getElementById("ArticleModalTitle").innerHTML = Title; // For each element output the variables retrieved from above
     document.getElementById("ArticleModalDesc").innerHTML = Desc;
     document.getElementById("ArticleModalImage").src = ImageURL;
@@ -257,8 +257,9 @@ function ArticleModalClose() {
 }
 /* API Results Handling */
 /* Check that the image can be retrieved and return the required url */
-function CheckImage(input) {
-    return input; // Return the image URL
+function CheckImage(BrokenImage) {
+    BrokenImage.onerror = ""; // Set the onerror element to blank
+    BrokenImage.src = "Images/download.png"; // Replace the source of the image to the placeholder one
 }
 /* Format the date so it can be output in a readable format */
 function FormatDate(Input) {
@@ -272,13 +273,11 @@ function OutputResults(Data) {
     var PageLimit = Data.articles.length < localStorage.getItem("PageSize") ? Data.articles.length : localStorage.getItem("PageSize"); // Store the lowest between the returned amount and page size
     for (i = 0; i < PageLimit; i++) { // For each number up to the Page Limit
 
-        var Title = Data.articles[i].title == null ? 'Unknown' : Data.articles[i].title; // For each piece of data check it is not null (if so output as 'Unknown' or replacement image) and then run format function if needed
-        var Author = Data.articles[i].author == null ? 'Unknown' : Data.articles[i].author;
-        var Source = Data.articles[i].source.name == null ? 'Unknown' : Data.articles[i].source.name;
-        var Desc = Data.articles[i].description == null ? 'Unknown' : Data.articles[i].description;
-        var Date = Data.articles[i].publishedAt == null ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
-        var ImageURL = Data.articles[i].urlToImage == null ? 'images/download.png' : CheckImage(Data.articles[i].urlToImage); // If not null run the function to check the image can load
-        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage();"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
+        var Title = (Data.articles[i].title == null || Data.articles[i].title == "") ? 'Unknown' : Data.articles[i].title; // For each piece of data check it is not null or empty ("") and if so output as 'Unknown' or the replacement image, if not then run the format function if needed and store the required data
+        var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
+        var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
+        var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/download.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
+        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
 /* Get the category name from the given value ready for XMLHttpRequest */
