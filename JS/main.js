@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded',
         }
     })
 );
+/* A function to open the given URL in a new tab */
+function OpenNewsArticle(URL) {
+    window.open(URL);
+}
 /* A function to format todays date so it can be compared to the input from the form */
 function FilterFormatDate() {
     var d = new Date(), // Create a new date variable
@@ -239,7 +243,7 @@ function ArticleModalOpen(i) {
     document.getElementById("ArticleModalTitle").innerHTML = Title; // For each element output the variables retrieved from above
     document.getElementById("ArticleModalDesc").innerHTML = Desc;
     document.getElementById("ArticleModalImage").src = ImageURL;
-    document.getElementById("ArticleModalMore").setAttribute("href", URL);
+    document.getElementById("ArticleModalMore").setAttribute("onclick", "OpenNewsArticle('" + URL + "')"); // Create an onclick event to open the article url in a new tab
     document.getElementById("ArticleModalDate").innerHTML = Date;
     document.getElementById("ArticleModalSource").innerHTML = Source;
     ArticleModal.style.display = "block"; // Show the article modal
