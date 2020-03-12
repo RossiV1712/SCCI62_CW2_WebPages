@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css?family=Sigmar+One&display=swap');
+
+/* Initial Country Modal full CSS */
+/* The Modal (background) */
+.Initmodal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 5;
+    /* Sit on top */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    -webkit-animation-name: fadeIn;
+    /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.Initmodal-content {
+    position: fixed;
+    bottom: 0px;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* The Close Button */
+.Initclose {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.Initclose:hover,
+.Initclose:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Initmodal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.Initmodal-body {
+    padding: 2px 16px;
+}
+
+.Initmodal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+#SubInitText {
+    font-size: 0.8rem;
+}
+
+
+.NavBar_Card {
+    display: contents;
+    font-size: 1.4rem;
+    scroll-snap-align: start;
+    width: 60%;
+}
+
+
+
+.card-text {
+    font-size: 0.8rem;
+}
+
+.ArticleCard {
+    border-radius: 4%;
+}
+
+.top-bar {
+/*    height: 20vh;*/
+    
+    z-index: 3;
+}
+
+#TopMainTitle {
+    font-family: 'Sigmar One', cursive;
+}
+
+.PageNumActive {
+    color: #007bff !important;
+    background-color: transparent;
+    background-image: none;
+    border-color: #007bff;
+    z-index: 2;
+}
+
+.TopBarHeader {
+    border: solid 2px black;
+    border-bottom: 0;
+}
+
+.NavBarSideScroll {
+    border: solid 2px black;
+    box-shadow: 0 5px 6px #000, 0 -5px 6px #000;
+}
+
+.NavBarInsideSideScroll::-webkit-scrollbar {
+    display: none;
+}
+
+#ArticleContainer {
+    height: 30vh;
+}
+
+.ArticleTitle {
+    font-size: 0.8rem;
+}
+
+.ArticleSource,
+.ArticleDate {
+    font-size: 0.7rem;
+}
+
+#NavCategoryScroll {
+    height: 8vh;
+    background-color: white;
+    overflow-x: hidden;
+    box-shadow: 25px 0 20px -20px #000 inset, -25px 0 20px -20px #000 inset;
+    border: solid 2px #000;
+}
+
+.carousel-cell {
+    padding-top: 1vh;
+    width: 50%;
+    height: 6vh;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    display: block;
+    text-align: center;
+}
+
+/* cell number */
+.carousel-cell:before {
+    display: block;
+    text-align: center;
+    line-height: 200px;
+    font-size: 800px;
+    color: white;
+}
+
+#ArticleModal {
+        position: unset!important;
+    max-height: 100%;
+}
+
+#SettingsModal {
+        position: unset!important;
+    max-height: 100%;
+}
+
+.ColourOption {
+    font-size: 1.5rem;
+}
+
+#ColourOption1 {
+    color: #05396B;
+}
+
+#ColourOption2 {
+    color: #FC4444;
+}
+
+#ColourOption6 {
+    color: #C7493A;
+}
+
+#ColourOption5 {
+    color: #5D5C61;
+}
+
+#ColourOption4 {
+    color: #0C0032;
+}
+
+#ColourOption3 {
+    color: #0B0C10;
+}
+
+#SearchActive {
+    color: black;
+    background-color: lightyellow;
+    border-bottom: solid 2px black;
+    box-shadow: 0 2px 5px #000;
+}

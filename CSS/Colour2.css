@@ -1,0 +1,100 @@
+.NavBarSideScroll, .TopBarHeader {
+    color: #AD8174;
+    background-color: #C7493A;
+}
+
+#SettingsIcon {
+       color: #AD8174!important;
+}
+
+.carousel-cell {
+    background: #689775;
+    color: #C7493A;
+}
+
+.SettingsModal-header {
+    background-color: #917164;
+}
+
+.SettingsModal-body {
+    background-color: #AD8174;
+}
+
+body {
+    background-color: #AD8174;
+    color: #A33327;
+}
+
+#collapseOne {
+    background-color: #917164;
+}
+
+#AcordianSearchHeader {
+    background-color: #A33327;
+}
+
+#AcordianSettingsHeader {
+    background-color: #A33327;
+}
+
+#collapseTwo {
+    background-color: #917164;
+    color: #A33327;
+}
+
+.ArticleCardBody {
+    background-color: #C7493A;
+    color: #AD8174;
+}
+
+.ArticleCardFoot {
+    background-color: #689775;
+}
+
+.ArticleModal-body {
+    background-color: #917164;
+}
+
+.ArticleModal-footer {
+    border-top-color: #A33327;
+    background-color: #689775;
+}
+
+
+#SettingsModalTitleOne {
+    color: #917164;
+}
+
+#SettingsModalTitleTwo {
+    color: #917164;
+}
+
+.form-control {
+    background-color: #A33327;
+    color: #689775;
+}
+
+.form-control::placeholder {
+    color: #689775;
+    opacity: 1;
+}
+
+.form-control:focus {
+    background-color: #A33327;
+    color: #689775;
+}
+
+.PageNumActive {
+    background-color: #917164!important;
+    color: #C7493A;
+}
+
+.page-link {
+    background-color: #AD8174;
+    color: #A33327;
+}
+
+#PagePrev, #PageNext {
+    background-color: #AD8174;
+    color: #A33327;
+}

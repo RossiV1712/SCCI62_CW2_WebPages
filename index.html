@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <title>RBV News</title>
+    <meta name="description" content="Collation of news sources with search and filter ability">
+    <meta name="keywords" content="NEWS">
+    <meta name="author" content="Ross Vernon">
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="CSS/flickity.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/Styles.css">
+    <link id="Colour" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="sticky-top top-bar w-100 px-3">
+        <div class="row align-middle TopBarHeader">
+            <div class="col-10 px-auto py-2">
+                <h1 class="text-center" id="TopMainTitle">RBVnews</h1>
+            </div>
+            <div class="col-2 px-2 py-2 d-flex align-items-middle">
+                <button onclick="OpenSettingsModal()" type="button" class="btn p-0" data-toggle="button" aria-label="Settings" aria-pressed="false" autocomplete="off">
+                    <i class="fas fa-sliders-h fa-2x" id="SettingsIcon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row NavBarSideScroll">
+            <div id="NavCategoryScroll" class="carousel col-11 mx-auto my-1 pt-1">
+                <div class="carousel-cell"><b>Local</b></div>
+                <div class="carousel-cell"><b>Business</b></div>
+                <div class="carousel-cell"><b>Entertainment</b></div>
+                <div class="carousel-cell"><b>Health</b></div>
+                <div class="carousel-cell"><b>Science</b></div>
+                <div class="carousel-cell"><b>Sports</b></div>
+                <div class="carousel-cell"><b>Technology</b></div>
+            </div>
+        </div>
+        <div class="row px-0" id="SearchActive" hidden>
+            <div class="col-11">
+                <h5 class="m-auto">
+                    Searching
+                </h5>
+            </div>
+            <div class="col-1">
+                <button type="button" class="close my-auto" aria-label="Close Search Alert" onclick="CloseSearchAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Initial Country Select Modal -->
+    <div id="InitCountrySelectModal" class="Initmodal modal">
+        <!-- Modal content -->
+        <div class="Initmodal-content modal-content fixed-bottom">
+            <div class="modal-header Initmodal-header">
+                <h2>Welcome to <b>RBVNews</b>!</h2>
+                <span id="InitCloseSpan" class="Initclose">&times;</span>
+            </div>
+            <div class="modal-body Initmodal-body">
+                <h3>This seems to be your first visit!</h3>
+                <label for="InitCountrySelect">Please select your Country of interest:</label>
+                <select class="form-control form-control-lg custom-select" id="InitCountrySelect">
+                    <option value="ar">Argentina</option>
+                    <option value="au">Australia</option>
+                    <option value="at">Austria</option>
+                    <option value="be">Belgium</option>
+                    <option value="br">Brazil</option>
+                    <option value="bg">Bulgaria</option>
+                    <option value="ca">Canada</option>
+                    <option value="cn">China</option>
+                    <option value="co">Colombia</option>
+                    <option value="cu">Cuba</option>
+                    <option value="cz">Czechia</option>
+                    <option value="eg">Egypt</option>
+                    <option value="fr">France</option>
+                    <option value="de">Germany</option>
+                    <option value="gr">Greece</option>
+                    <option value="hk">Hong Kong</option>
+                    <option value="hu">Hungary</option>
+                    <option value="in">India</option>
+                    <option value="id">Indonesia</option>
+                    <option value="ie">Ireland</option>
+                    <option value="il">Israel</option>
+                    <option value="it">Italy</option>
+                    <option value="jp">Japan</option>
+                    <option value="kr">Korea</option>
+                    <option value="lv">Latvia</option>
+                    <option value="lt">Lithuania</option>
+                    <option value="my">Malaysia</option>
+                    <option value="mx">Mexico</option>
+                    <option value="ma">Morocco</option>
+                    <option value="nl">Netherlands</option>
+                    <option value="nz">New Zealand</option>
+                    <option value="ng">Nigeria</option>
+                    <option value="no">Norway</option>
+                    <option value="ph">Philippines</option>
+                    <option value="pl">Poland</option>
+                    <option value="pt">Portugal</option>
+                    <option value="ro">Romania</option>
+                    <option value="ru">Russia</option>
+                    <option value="sa">Saudi Arabia</option>
+                    <option value="rs">Serbia</option>
+                    <option value="sg">Singapore</option>
+                    <option value="sk">Slovakia</option>
+                    <option value="si">Slovenia</option>
+                    <option value="za">South Africa</option>
+                    <option value="se">Sweden</option>
+                    <option value="ch">Switzerland</option>
+                    <option value="tw">Taiwan</option>
+                    <option value="th">Thailand</option>
+                    <option value="tr">Turkey</option>
+                    <option value="ua">Ukraine</option>
+                    <option value="ae">United Arab Emirates</option>
+                    <option value="gb" selected>United Kingdom</option>
+                    <option value="us">United States of America</option>
+                    <option value="ve">Venezuela</option>
+                </select>
+                <label for="InitLanguageSelect">Please select your Chosen Language:</label>
+                <select class="form-control form-control-lg custom-select" id="InitLanguageSelect">
+                    <option value="ar">Arabic</option>
+                    <option value="de">German</option>
+                    <option value="en" selected>English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="it">Italian</option>
+                    <option value="nl">Dutch</option>
+                    <option value="no">Norwegian</option>
+                    <option value="pt">Portugese</option>
+                    <option value="ru">Russian</option>
+                    <option value="se">Swedish</option>
+                </select>
+                <p class="text-muted font-weight-light" id="SubInitText">These can be changed at any time in the settings menu</p>
+            </div>
+            <div class="modal-footer Initmodal-footer">
+                <button type="button" class="btn btn-outline-light" id="InitmodalSubmit" onclick="InitSelectLang();">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="Main" class="container-fluid mt-2">
+        <div id="SettingsModal" class="modal w-100">
+            <div class="modal-content SettingsModal-content">
+                <div class="modal-header SettingsModal-header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="modal-body SettingsModal-body">
+                    <div class="accordion" id="FullAcordian">
+                        <div class="card">
+                            <div class="card-header" id="AcordianSearchHeader">
+                                <h2 class="mb-0">
+                                    <button id="SettingsModalTitleOne" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Search for Articles
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="AcordianSearchHeader" data-parent="#FullAcordian">
+                                <div class="card-body">
+                                    <div class="col-12 row">
+                                        <label for="SearchBar">Search:</label>
+                                        <input type="text" id="SearchBar" class="form-control" placeholder="Search Here!">
+                                        <div id="DateSearchError" class="invalid-feedback">
+                                            Please enter a search term
+                                        </div>
+                                    </div>
+                                    <div class="col-12 row">
+                                        <div class="col-12 col-sm-6 px-0 pr-sm-2">
+                                            <label for="DateFrom">Date From:</label>
+                                            <input id="SearchDateFrom" class="form-control" type="date">
+                                            <div id="DateFromError" class="invalid-feedback">
+                                                Date out of range
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 px-0 pl-sm-2">
+                                            <label for="DateTo">Date To:</label>
+                                            <input id="SearchDateTo" class="form-control" type="date">
+                                            <div id="DateToError" class="invalid-feedback">
+                                                Date out of range
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 row">
+                                        <label for="SettingsLangSelect">Language:</label>
+                                        <select class="form-control form-control-lg custom-select" id="SearchLangSelect">
+                                            <option value="ar">Arabic</option>
+                                            <option value="de">German</option>
+                                            <option value="en">English</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="it">Italian</option>
+                                            <option value="nl">Dutch</option>
+                                            <option value="no">Norwegian</option>
+                                            <option value="pt">Portugese</option>
+                                            <option value="ru">Russian</option>
+                                            <option value="se">Swedish</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 row">
+                                        <div class="col-12 px-0">
+                                            <label for="SearchSort">Sort by:</label>
+                                        </div>
+                                        <select class="form-control form-control-lg custom-select" id="SearchSort">
+                                            <option value="pub">Newest</option>
+                                            <option value="rel">Most Relevant</option>
+                                            <option value="pop">Most Popular</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 row mt-2">
+                                        <button class="mx-auto btn btn-primary" type="submit" onclick="FilterSubmit()">Go!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="AcordianSettingsHeader">
+                                <h2 class="mb-0">
+                                    <button id="SettingsModalTitleTwo" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Settings
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="AcordianSettingsHeader" data-parent="#FullAcordian">
+                                <div class="card-body row">
+                                    <div class="col-12 row">
+                                        <label for="SettingsCountrySelect">Please choose your Country of interest:</label>
+                                        <select class="form-control form-control-lg custom-select" id="SettingsCountrySelect">
+                                            <option value="ar">Argentina</option>
+                                            <option value="au">Australia</option>
+                                            <option value="at">Austria</option>
+                                            <option value="be">Belgium</option>
+                                            <option value="br">Brazil</option>
+                                            <option value="bg">Bulgaria</option>
+                                            <option value="ca">Canada</option>
+                                            <option value="cn">China</option>
+                                            <option value="co">Colombia</option>
+                                            <option value="cu">Cuba</option>
+                                            <option value="cz">Czechia</option>
+                                            <option value="eg">Egypt</option>
+                                            <option value="fr">France</option>
+                                            <option value="de">Germany</option>
+                                            <option value="gr">Greece</option>
+                                            <option value="hk">Hong Kong</option>
+                                            <option value="hu">Hungary</option>
+                                            <option value="in">India</option>
+                                            <option value="id">Indonesia</option>
+                                            <option value="ie">Ireland</option>
+                                            <option value="il">Israel</option>
+                                            <option value="it">Italy</option>
+                                            <option value="jp">Japan</option>
+                                            <option value="kr">Korea</option>
+                                            <option value="lv">Latvia</option>
+                                            <option value="lt">Lithuania</option>
+                                            <option value="my">Malaysia</option>
+                                            <option value="mx">Mexico</option>
+                                            <option value="ma">Morocco</option>
+                                            <option value="nl">Netherlands</option>
+                                            <option value="nz">New Zealand</option>
+                                            <option value="ng">Nigeria</option>
+                                            <option value="no">Norway</option>
+                                            <option value="ph">Philippines</option>
+                                            <option value="pl">Poland</option>
+                                            <option value="pt">Portugal</option>
+                                            <option value="ro">Romania</option>
+                                            <option value="ru">Russia</option>
+                                            <option value="sa">Saudi Arabia</option>
+                                            <option value="rs">Serbia</option>
+                                            <option value="sg">Singapore</option>
+                                            <option value="si">Slovenia</option>
+                                            <option value="sk">Slovakia</option>
+                                            <option value="za">South Africa</option>
+                                            <option value="se">Sweden</option>
+                                            <option value="ch">Switzerland</option>
+                                            <option value="tw">Taiwan</option>
+                                            <option value="th">Thailand</option>
+                                            <option value="tr">Turkey</option>
+                                            <option value="ua">Ukraine</option>
+                                            <option value="ae">United Arab Emirates</option>
+                                            <option value="gb">United Kingdom</option>
+                                            <option value="us">United States of America</option>
+                                            <option value="ve">Venezuela</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 row">
+                                        <label for="SettingsLangSelect">Please choose your Language of choice:</label>
+                                        <select class="form-control form-control-lg custom-select" id="SettingsLangSelect">
+                                            <option value="ar">Arabic</option>
+                                            <option value="de">German</option>
+                                            <option value="en">English</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="it">Italian</option>
+                                            <option value="nl">Dutch</option>
+                                            <option value="no">Norwegian</option>
+                                            <option value="pt">Portugese</option>
+                                            <option value="ru">Russian</option>
+                                            <option value="se">Swedish</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 row">
+                                        <div class="col-12">
+                                            <label for="SettingsColourSelect">Which colour do you choose?</label>
+                                        </div>
+                                        <div class="col-12 row">
+                                            <div class="col-4 m-auto px-auto">
+                                                <input id="SettingsColourRadio1" type="radio" name="ColourSelect" value="1"><i id="ColourOption1" class="fas fa-circle ColourOption"></i>
+                                            </div>
+                                            <div class="col-4 m-auto px-auto">
+                                                <input id="SettingsColourRadio2" type="radio" name="ColourSelect" value="2"><i id="ColourOption2" class="fas fa-circle ColourOption"></i>
+                                            </div>
+                                            <div class="col-4 m-auto px-auto">
+                                                <input id="SettingsColourRadio3" type="radio" name="ColourSelect" value="3"><i id="ColourOption3" class="fas fa-circle ColourOption"></i>
+                                            </div>
+                                            <div class="col-4 m-auto px-auto">
+                                                <input id="SettingsColourRadio4" type="radio" name="ColourSelect" value="4"><i id="ColourOption4" class="fas fa-circle ColourOption"></i>
+                                            </div>
+                                            <div class="col-4 m-auto px-auto">
+                                                <input id="SettingsColourRadio5" type="radio" name="ColourSelect" value="5"><i id="ColourOption5" class="fas fa-circle ColourOption"></i>
+                                            </div>
+                                            <div class="col-4 m-auto px-auto">
+                                                <input id="SettingsColourRadio6" type="radio" name="ColourSelect" value="6"><i id="ColourOption6" class="fas fa-circle ColourOption"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 row">
+                                        <label for="SettingsPageSizeSelect8">How many articles per page?</label>
+                                        <input type="range" min="1" max="50" class="form-control slider" id="SettingsPageSizeSlider">
+                                        <p>Value: <span id="SettingsPageSizeDisplay"></span></p>
+                                    </div>
+                                    <button type="button" class="btn" onclick="SettingsSubmit()">Save</button>
+                                    <button type="button" class="btn" onclick="CloseSettingsModal()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer SettingsModal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ArticleModal" class="modal">
+            <div class="modal-content ArticleModal-content">
+                <div class="modal-header p-0 ArticleModal-header">
+                    <img class="img-fluid rounded-top" id="ArticleModalImage">
+                </div>
+                <div class="modal-body ArticleModal-body">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h6 class="text-muted" id="ArticleModalSource"></h6>
+                        </div>
+                        <div class="col-12 px-0">
+                            <h6 class="text-muted" id="ArticleModalDate"></h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h3 class="" id="ArticleModalTitle"></h3>
+                    </div>
+                    <div class="row">
+                        <h6 class="" id="ArticleModalDesc"></h6>
+                    </div>
+                </div>
+                <div class="modal-footer ArticleModal-footer">
+                    <a class="button btn btn-default" id="ArticleModalMore">Read More</a>
+                    <button class="btn btn-default" id="ArticleModalClose" onclick="ArticleModalClose();">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3" id="ArticleOutput">
+        </div>
+
+        <div id="Pagination" class="mt-2">
+            <nav aria-label="Page navigation">
+                <ul id="PageNavBar" class="pagination justify-content-center">
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <script src="JS/index.umd.min.js"></script> <!-- Pull to refresh -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script> <!-- Popper JS -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- JQuery -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script> <!-- Bootstrap JS Bundle -->
+    <script src="JS/flickity.pkgd.min.js"></script> <!-- Flickity JS -->
+    <script src="JS/main.js"></script> <!-- Custom JS -->
+    <script>
+        /* global PullToRefresh */
+        PullToRefresh.init({
+            mainElement: '#ArticleOutput',
+            onRefresh: function() {
+                RefreshArticles(1);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
