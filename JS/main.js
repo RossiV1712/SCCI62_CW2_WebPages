@@ -1,4 +1,5 @@
 var PossCountries = ['ae', 'ar', 'at', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn', 'co', 'cu', 'cz', 'de', 'eg', 'fr', 'gb', 'gr', 'hk', 'hu', 'id', 'ie', 'il', 'in', 'it', 'jp', 'kr', 'lt', 'lv', 'ma', 'mx', 'my', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt', 'ro', 'rs', 'ru', 'sa', 'se', 'sg', 'si', 'sk', 'th', 'tr', 'tw', 'ua', 'us', 've', 'za']; // An array containing all possible countries for the API call
+var PossLang = ['ar', 'de', 'en', 'es', 'fr', 'it', 'nl', 'no', 'pt', 'ru', 'se']; // An array containing all possible languages for the API call
 var APIKEY = '0e2c625bcdbb4b23879ec13bf7fed0fd';
 var Initmodal = document.getElementById("InitCountrySelectModal"); // Get the Initial modal element and store globally so it can always be used
 var OutputArea = document.getElementById("ArticleOutput"); // Get the area ready for the articles to be displayed
@@ -62,7 +63,7 @@ function CloseSearchAlert() {
 function ColourStyle() {
     var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
-    var Colour = isNaN(StoredColour) ? "1" : StoredColour; // If the StoredColour is NotANumber the store 1, other wise store the integer
+    var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
     StyleSheet.setAttribute("href", "CSS/Colour" + Colour + ".css"); // Set the stylesheet href to the stored variable
 }
 /* Open the initial modal for first time use */
@@ -114,9 +115,17 @@ function LoadStoredSettings() {
     var StoredSearchQ = sessionStorage.getItem("Search") == null ? "" : sessionStorage.getItem("Search"); // Retrieve the variables from session storage
     var DateFrom = sessionStorage.getItem("FromDate") == null ? "" : sessionStorage.getItem("FromDate");
     var DateTo = sessionStorage.getItem("ToDate") == null ? "" : sessionStorage.getItem("ToDate");
-    var Lang = sessionStorage.getItem("Lang") == null ? (localStorage.getItem("Lang") == null ? "" : localStorage.getItem("Lang")) : sessionStorage.getItem("Lang"); // If the session storage is null then check the local storage and store it if not null, other wise store the session storage variable
     var SortBy = sessionStorage.getItem("SortBy") == null ? "" : sessionStorage.getItem("SortBy");
-
+    if ((sessionStorage.getItem("Lang") == null) || (PossLang.includes(sessionStorage.getItem("Lang")) == false)) { // If session storage variable "Lang" is null or not in the possible array
+        if ((localStorage.getItem("Lang") == null || PossLang.includes(localStorage.getItem("Lang")) == false)) { // If local storage variable "Lang" is null or not in the possible array
+            var Lang = 'en'; // Set the language to en
+        } else { // Otherwise, if local storage variable "Lang" is not null and in the possible array
+            var Lang = localStorage.getItem("Lang"); // Set Lang to the retrieved value
+        }
+    } else { // Otherwise, if session storage variable "Lang" is not null and in the possible array
+        var Lang = sessionStorage.getItem("Lang"); // Set Lang to the retrieved value
+    }
+    /* Use the prepared values to show in the search modal */
     document.getElementById("SearchBar").value = StoredSearchQ; // Get the elements and change the values to the retrieved values
     document.getElementById("SearchDateFrom").value = DateFrom;
     document.getElementById("SearchDateTo").value = DateTo;
@@ -127,8 +136,12 @@ function LoadStoredSettings() {
             SearchSortOptions[i].setAttribute("selected", "true"); // Select this element
         } 
     }
-
+    /* Prepare variables from storage for use in the settings modal */
+    var Country = (localStorage.getItem("Country") == null || PossCountries.includes(localStorage.getItem("Country")) == false) ? 'gb' : localStorage.getItem("Country"); // Variables to be stored for loading in the settigns modal, with error checking
+    var Language = (localStorage.getItem("Lang") == null || PossLang.includes(localStorage.getItem("Lang")) == false) ? "en" : localStorage.getItem("Lang");
     /* Country Select */
+    var StoredColour = (localStorage.getItem("Colour") == null || isNaN(parseInt(localStorage.getItem("Colour"))) || localStorage.getItem("Colour") <= 0 || localStorage.getItem("Colour") > 6) ? 1 : localStorage.getItem("Colour"); // Store the elements for the Colour select with error checking for null value or not a number and is in range
+    var PageSize = (localStorage.getItem("PageSize") == null || isNaN(parseInt(localStorage.getItem("PageSize"))) || localStorage.getItem("PageSize") <= 0 || localStorage.getItem("PageSize") > 50) ? 20 : localStorage.getItem("PageSize"); // Set the initial slider value to the value retrieved from local storage with checking for null or not a number and is in range
     var SettCountrySelect = document.getElementById("SettingsCountrySelect"); // Store the element for the country select
     var SettCountryOptions = SettCountrySelect.getElementsByTagName("option"); // Store each option element inside the country select
     for (i = 0; i < SettCountrySelect.length; i++) { // For each option element
@@ -136,13 +149,12 @@ function LoadStoredSettings() {
             SettCountryOptions[i].setAttribute("selected", "true"); // Select this element
         }
     }
-    
     /* Language */
     var SettLangSelect = document.getElementById("SettingsLangSelect"); // Store the elements for the Settings Lanuage select
     var SettLangOptions = SettLangSelect.getElementsByTagName("option"); // Store the options inside the Settings Language select element
     var SearchLangSelect = document.getElementById("SearchLangSelect").getElementsByTagName("option"); // Store the options inside the Search Language element
     for (i = 0; i < SettLangSelect.length; i++) { // For each element
-        if (SettLangOptions[i].value == localStorage.getItem("Lang")) { // If the element value is the same as the stored value
+        if (SettLangOptions[i].value == Language) { // If the element value is the same as the stored value
             SettLangOptions[i].setAttribute("selected", "true"); // Select this element
         }
         if (SettLangOptions[i].value == Lang) { // if the element value is the same as the stored value
@@ -151,7 +163,6 @@ function LoadStoredSettings() {
     }
     
     /* Colour */
-    var StoredColour = localStorage.getItem("Colour") == null ? 1 : localStorage.getItem("Colour"); // Store the elements for the Colour select
     for (i = 1; i <= document.getElementsByName("ColourSelect").length; i++) { // For each element
         document.getElementById("SettingsColourRadio" + i).removeAttribute("checked"); // Remove the selected attribute
         if (document.getElementById("SettingsColourRadio" + i).value == StoredColour) { // If the element value is the same as the retrieved value
@@ -161,7 +172,7 @@ function LoadStoredSettings() {
     /* Page Size */
     var slider = document.getElementById("SettingsPageSizeSlider"); // Store the elements for the Page Size select
     var output = document.getElementById("SettingsPageSizeDisplay"); 
-    slider.value = localStorage.getItem("PageSize"); // Set the initial slider value to the value retrieved from local storage
+    slider.value = PageSize;
     output.innerHTML = slider.value; // Display the current value in the output element
     slider.oninput = function () { // Each time the value of the slider changes
         output.innerHTML = this.value; // Display the current value in the output element
@@ -238,7 +249,7 @@ function ArticleModalOpen(i) {
     var Source = (ReturnedData.articles[i].source.name == null || ReturnedData.articles[i].source.name == "") ? 'Unknown' : ReturnedData.articles[i].source.name;
     var Desc = (ReturnedData.articles[i].description == null || ReturnedData.articles[i].decription == "") ? 'Unknown' : ReturnedData.articles[i].description;
     var Date = (ReturnedData.articles[i].publishedAt == null || ReturnedData.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(ReturnedData.articles[i].publishedAt);
-    var ImageURL = (ReturnedData.articles[i].urlToImage == null || ReturnedData.articles[i].urlToImage == "") ? 'images/download.png' : ReturnedData.articles[i].urlToImage;
+    var ImageURL = (ReturnedData.articles[i].urlToImage == null || ReturnedData.articles[i].urlToImage == "") ? 'Images/TempImage.png' : ReturnedData.articles[i].urlToImage;
     var URL = (ReturnedData.articles[i].url == null || ReturnedData.articles[i].url == "") ? 'Unknown' : ReturnedData.articles[i].url;
     document.getElementById("ArticleModalTitle").innerHTML = Title; // For each element output the variables retrieved from above
     document.getElementById("ArticleModalDesc").innerHTML = Desc;
@@ -259,7 +270,7 @@ function ArticleModalClose() {
 /* Check that the image can be retrieved and return the required url */
 function CheckImage(BrokenImage) {
     BrokenImage.onerror = ""; // Set the onerror element to blank
-    BrokenImage.src = "Images/download.png"; // Replace the source of the image to the placeholder one
+    BrokenImage.src = "Images/TempImage.png"; // Replace the source of the image to the placeholder one
 }
 /* Format the date so it can be output in a readable format */
 function FormatDate(Input) {
@@ -276,7 +287,7 @@ function OutputResults(Data) {
         var Title = (Data.articles[i].title == null || Data.articles[i].title == "") ? 'Unknown' : Data.articles[i].title; // For each piece of data check it is not null or empty ("") and if so output as 'Unknown' or the replacement image, if not then run the format function if needed and store the required data
         var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
         var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
-        var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/download.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
+        var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
         OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
