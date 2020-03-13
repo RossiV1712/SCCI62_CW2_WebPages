@@ -29,10 +29,6 @@ document.addEventListener('DOMContentLoaded',
         }
     })
 );
-/* A function to open the given URL in a new tab */
-function OpenNewsArticle(URL) {
-    window.open(URL);
-}
 /* A function to format todays date so it can be compared to the input from the form */
 function FilterFormatDate() {
     var d = new Date(), // Create a new date variable
@@ -48,8 +44,8 @@ function FilterFormatDate() {
 /* Show the top bar to display that the search results are currently showing */
 function ShowSearchAlert() {
     document.getElementById("SearchActive").removeAttribute("hidden"); // Remove the hidden attribute from the Search box
-    sessionStorage.setItem("Searching", true); // Set the session storage variable of Searching to true
     CreateSearchCell(); // Run the function to create the Search cell in the navigation bar
+    sessionStorage.setItem("Searching", true); // Set the session storage variable of Searching to true
     RefreshArticles(1); // Run the function to refresh the articles (with the search variables)
 }
 /* Hide the top bar to show that the search results are no longer showing */
@@ -217,13 +213,13 @@ function FilterSubmit() {
         document.getElementById("SearchDateFrom").classList.remove("is-invalid"); // Otherwise remove the class as there is no longer an error (for multiple search attempts)
         document.getElementById("SearchDateTo").classList.remove("is-invalid"); // Otherwise remove the class as there is no longer an error (for multiple search attempts)
     }
+    CloseSettingsModal(); // Run the function to close the settings modal
+    ShowSearchAlert(); // Run the function to show the search box
     sessionStorage.setItem("FromDate", FromDate); // Store the chosen terms
     sessionStorage.setItem("ToDate", ToDate);
     sessionStorage.setItem("Search", q);
     sessionStorage.setItem("Lang", document.getElementById("SearchLangSelect").value);
     sessionStorage.setItem("SortBy", document.getElementById("SearchSort").value);
-    ShowSearchAlert(); // Run the function to show the search box
-    CloseSettingsModal(); // Run the function to close the settings modal
 }
 /* A function to store all of the settings submitted in the settings modal */
 function SettingsSubmit() {
@@ -254,7 +250,7 @@ function ArticleModalOpen(i) {
     document.getElementById("ArticleModalTitle").innerHTML = Title; // For each element output the variables retrieved from above
     document.getElementById("ArticleModalDesc").innerHTML = Desc;
     document.getElementById("ArticleModalImage").src = ImageURL;
-    document.getElementById("ArticleModalMore").setAttribute("onclick", "OpenNewsArticle('" + URL + "')"); // Create an onclick event to open the article url in a new tab
+    document.getElementById("ArticleModalMore").setAttribute("onclick", "window.open('" + URL + "')"); // Create an onclick event to open the article url in a new tab
     document.getElementById("ArticleModalDate").innerHTML = Date;
     document.getElementById("ArticleModalSource").innerHTML = Source;
     ArticleModal.style.display = "block"; // Show the article modal
@@ -429,8 +425,10 @@ function InitialiseCatSelection() {
     var NavBarCarousel = $carousel.data('flickity'); // Store the data value into a variable
 
     NavBarCarousel.on('change', function (index) { // On the carousel value change 
+        CloseSettingsModal();
+        ArticleModalClose();
         sessionStorage.setItem("Category", index); // Set the session storage variable to the new cell
-        if ((sessionStorage.getItem("Searching") == 'true') && (NavBarCarousel.selectedElement.id !== 'SearchCell')) { // If searching is try and the selected cell is not the Search cell
+        if ((sessionStorage.getItem("Searching") == 'true') && (NavBarCarousel.selectedElement.id !== 'SearchCell')) { // If searching is true and the selected cell is not the Search cell
             CloseSearchAlert(); // Close the Search alert
         } else { // Otherwise
             RefreshArticles(1); //Refresh articles
@@ -441,6 +439,15 @@ function InitialiseCatSelection() {
 /* Add the search cell to the navigation carousel at the top of the screen and scroll to it */
 function CreateSearchCell() {
     var $carousel = $('.carousel').flickity(); // Select the carousel
+    try { // Attempt to run
+        var $cellElem = $('#SearchCell'); // Select the cell from the id
+    }
+    catch(e) { // If there is an error
+        var SearchCell = false; // Set the variable to false
+    }
+    if (sessionStorage.getItem("Searching") && SearchCell){ // If the session storage is 
+        return;
+    }
     var $cellElem = $('<div id="SearchCell" class="carousel-cell"><b>Search</b></div>'); // Set the element html
     $carousel.flickity('insert', $cellElem, 0); // Insert the new cell into index 0
     $carousel.flickity('select', 0); // Select the new cell
@@ -448,7 +455,6 @@ function CreateSearchCell() {
 /* Remove the search cell from the navigation carousel at the top of the screen and scroll away from it */
 function RemoveSearchCell() {
     var $carousel = $('.carousel').flickity(); // Select the carousel
-    $carousel.flickity('select', 1);// Select the local cell
     var $cellElem = $('#SearchCell'); // Select the cell from the id
     $carousel.flickity('remove', $cellElem); // Remove the cell
 }
