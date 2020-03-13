@@ -158,12 +158,9 @@
     <div id="Main" class="container-fluid mt-2">
         <div id="SettingsModal" class="modal w-100">
             <div class="modal-content SettingsModal-content">
-                <div class="modal-header SettingsModal-header">
-                    <h1>Settings</h1>
-                </div>
-                <div class="modal-body SettingsModal-body">
+                <div class="modal-body SettingsModal-body p-0">
                     <div class="accordion" id="FullAcordian">
-                        <div class="card">
+                        <div class="card" id="SettCardTop">
                             <div class="card-header" id="AcordianSearchHeader">
                                 <h2 class="mb-0">
                                     <button id="SettingsModalTitleOne" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -224,12 +221,17 @@
                                         </select>
                                     </div>
                                     <div class="col-12 row mt-2">
-                                        <button class="mx-auto btn btn-primary" type="submit" onclick="FilterSubmit()">Go!</button>
+                                        <div class="col text-center">
+                                            <button class="mx-auto btn" type="submit" onclick="CloseSettingsModal()">Cancel</button>
+                                        </div>
+                                        <div class="col text-center">
+                                            <button class="mx-auto btn" type="submit" onclick="FilterSubmit()">Search!</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" id="SettCardBot">
                             <div class="card-header" id="AcordianSettingsHeader">
                                 <h2 class="mb-0">
                                     <button id="SettingsModalTitleTwo" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -344,8 +346,14 @@
                                         <input type="range" min="1" max="50" class="form-control slider" id="SettingsPageSizeSlider">
                                         <p>Value: <span id="SettingsPageSizeDisplay"></span></p>
                                     </div>
-                                    <button type="button" class="btn" onclick="SettingsSubmit()">Save</button>
-                                    <button type="button" class="btn" onclick="CloseSettingsModal()">Close</button>
+                                    <div class="col-12 row">
+                                        <div class="col text-center">
+                                            <button type="button" class="btn" onclick="CloseSettingsModal()">Close</button>
+                                        </div>
+                                        <div class="col text-center">
+                                            <button type="button" class="btn" onclick="SettingsSubmit()">Save</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
