@@ -1,0 +1,22 @@
+{
+  "name": "RBVNews PWA",
+  "short_name": "RBVNews",
+  "icons": [{
+    "src": "favicon.ico",
+      "sizes": "16x16",
+      "type": "image/png"
+    }, {
+      "src": "favicon-16x16.ico",
+      "sizes": "16x16",
+      "type": "image/png"
+    }, {
+      "src": "favicon-32x32.ico",
+      "sizes": "32x32",
+      "type": "image/png"
+    }],
+  "lang": "en-GB",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white"
+}

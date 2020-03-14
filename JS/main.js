@@ -29,6 +29,18 @@ document.addEventListener('DOMContentLoaded',
         }
     })
 );
+/* If the service worker exists, register it */
+window.onload = () => {
+    'use strict';
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('sw.js')
+            .then(function () {
+                console.log("Service Worker Registered");
+            });
+    }
+};
 /* A function to format todays date so it can be compared to the input from the form */
 function FilterFormatDate() {
     var d = new Date(), // Create a new date variable
