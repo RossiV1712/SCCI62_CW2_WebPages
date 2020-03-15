@@ -309,7 +309,6 @@ function GetCategory(i) {
 }
 /* News API GET request with required elements */
 function RetrieveNews(Page, callback) {
-
     var Category = sessionStorage.getItem("Category") == null ? "" : GetCategory(sessionStorage.getItem("Category")); // Retrieve the category from the local storage
     SelectedCountry = localStorage.getItem("Country") == null ? "gb" : localStorage.getItem("Country"); // Retrieve the Country from the local storage
     PageSize = localStorage.getItem("PageSize"); // Retrieve the chosen Page Size from the local storage
@@ -336,6 +335,11 @@ function RetrieveNews(Page, callback) {
     }
     NewsRequest.open('GET', APIRequestURL, true); // Open the API request with the method GET and the prepared string
     NewsRequest.send(); // Send the API request
+    NewsRequest.onerror = function() {
+        console.log("Article retrieval failed - No Internet Connection.");
+        console.log("Loading placeholder instead");
+        HideCards();
+    }
 }
 /* Retrieve and Output articles */
 function RefreshArticles(Page) {

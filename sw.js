@@ -1,6 +1,5 @@
-var cacheName = 'weather-pwa';
+var cacheName = 'RBVNews-PWA';
 var filesToCache = [
-    '/',
     'index.html',
     'CSS/Styles.css',
     'CSS/Colour1.css',
