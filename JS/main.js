@@ -68,9 +68,11 @@ function CloseSearchAlert() {
 /* Update the colour css file */
 function ColourStyle() {
     var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
+    var ManifestFile = document.getElementById("ManifestFile"); // Store the manifest element
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
     StyleSheet.setAttribute("href", "CSS/Colour" + Colour + ".css"); // Set the stylesheet href to the stored variable
+    ManifestFile.setAttribute("href", "manifest" + Colour + ".json"); // Set the manifest href to the stored variable
 }
 /*  */
 function DisplayIntError() {
