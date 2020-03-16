@@ -30,9 +30,7 @@ document.addEventListener('DOMContentLoaded',
     })
 );
 /* If the service worker exists, register it */
-window.onload = () => {
-    'use strict';
-
+window.onload = function () {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
             .register('sw.js')
@@ -73,6 +71,14 @@ function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
     StyleSheet.setAttribute("href", "CSS/Colour" + Colour + ".css"); // Set the stylesheet href to the stored variable
+}
+/*  */
+function DisplayIntError() {
+    console.log("Display Int Error");
+}
+/*  */
+function ShowIntErrorMessage() {
+    console.log("Show Int Error");
 }
 /* Open the initial modal for first time use */
 function OpenInitCountryModal() {
@@ -338,7 +344,15 @@ function RetrieveNews(Page, callback) {
     NewsRequest.onerror = function() {
         console.log("Article retrieval failed - No Internet Connection.");
         console.log("Loading placeholder instead");
-        HideCards();
+        console.log(ReturnedData);
+        if (ReturnedData !== undefined) {
+            OutputResults(ReturnedData);
+        }
+        else {
+            HideCards();
+            DisplayIntError();
+        }
+        ShowIntErrorMessage();
     }
 }
 /* Retrieve and Output articles */

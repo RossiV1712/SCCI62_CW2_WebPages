@@ -1,5 +1,6 @@
 var cacheName = 'RBVNews-PWA';
 var filesToCache = [
+    '/',
     'index.html',
     'CSS/Styles.css',
     'CSS/Colour1.css',
@@ -18,7 +19,10 @@ var filesToCache = [
     'JS/index.umd.min.js',
     'JS/index.umd.min.js.map',
     'JS/jquery-3.4.1.min.js',
-    'JS/popper.min.js'
+    'JS/popper.min.js',
+    'favicon-16x16.png',
+    'favicon-32x32.png',
+    'favicon.ico'
 ];
 
 /* Start the service worker and cache all of the app's content */
