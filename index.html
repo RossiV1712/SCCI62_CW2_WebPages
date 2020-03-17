@@ -55,7 +55,7 @@
                 <div class="carousel-cell"><b>Technology</b></div>
             </div>
         </div>
-        <div class="row px-0" id="SearchActive" hidden>
+        <div class="row px-0 py-1 alert alert-info" id="SearchActive" hidden>
             <div class="col-11">
                 <h5 class="m-auto">
                     Searching
@@ -398,12 +398,15 @@
         <div class="row my-3" id="ArticleOutput">
         </div>
 
-        <div id="Pagination" class="mt-2">
+        <div id="Pagination" class="mt-2 mb-5">
             <nav aria-label="Page navigation">
                 <ul id="PageNavBar" class="pagination justify-content-center">
 
                 </ul>
             </nav>
+        </div>
+        <div class="fixed-bottom alert-danger text-center">
+            <h4>Connection Error</h4>
         </div>
     </div>
     <script src="JS/index.umd.min.js"></script> <!-- Pull to refresh -->

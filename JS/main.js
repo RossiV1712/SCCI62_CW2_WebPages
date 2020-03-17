@@ -316,7 +316,8 @@ function GetCategory(i) {
     }
 }
 /* News API GET request with required elements */
-function RetrieveNews(Page, callback) {
+function RetrieveNews(Page, callback) { 
+    console.log("Retreieve");
     var Category = sessionStorage.getItem("Category") == null ? "" : GetCategory(sessionStorage.getItem("Category")); // Retrieve the category from the local storage
     SelectedCountry = localStorage.getItem("Country") == null ? "gb" : localStorage.getItem("Country"); // Retrieve the Country from the local storage
     PageSize = localStorage.getItem("PageSize"); // Retrieve the chosen Page Size from the local storage
@@ -324,6 +325,7 @@ function RetrieveNews(Page, callback) {
     NewsRequest.onreadystatechange = function () { // On a change in the ready state of the XMLhttp request
         if (this.readyState == 4 && this.status == 200) { // If the readyState of the request is complete and the status means that the request was successful
             ReturnedData = JSON.parse(this.response); // parse the JSON response and store it so it is available everywhere
+            console.log(ReturnedData);
             if (ReturnedData.totalResults > PageSize) { // If there are more results than are on 1 page
                 var PagesNeeded = Math.ceil(ReturnedData.totalResults / PageSize); // Work out how many pages are needed rounded up
                 DisplayNavBar(Page, PagesNeeded); // Configure and display nav bar based off of current page and total pages needed
@@ -341,6 +343,13 @@ function RetrieveNews(Page, callback) {
     } else { // If search is not active
         var APIRequestURL = 'https://newsapi.org/v2/top-headlines?pageSize=' + PageSize + '&page=' + Page + '&country=' + SelectedCountry + '&category=' + Category + '&sortBy=popularity&apiKey=' + APIKEY; // Create the API request
     }
+    console.log(q);
+    console.log(DateFrom);
+    console.log(DateTo);
+    console.log(Lang);
+    console.log(SortBy);
+    console.log(APIRequestURL);
+    alert(APIRequestURL);
     NewsRequest.open('GET', APIRequestURL, true); // Open the API request with the method GET and the prepared string
     NewsRequest.send(); // Send the API request
     NewsRequest.onerror = function() {

@@ -254,10 +254,7 @@
 }
 
 #SearchActive {
-    color: black;
-    background-color: lightyellow;
-    border-bottom: solid 2px black;
-    box-shadow: 0 2px 5px #000;
+    border-radius: 0;
 }
 
 #SettCardBot {
