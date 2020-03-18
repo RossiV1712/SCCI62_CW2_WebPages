@@ -266,3 +266,13 @@
     border-top-right-radius: .25rem;
     border-top-left-radius: .25rem;
 }
+
+.NetWarning {
+    border: 2px solid #721c24;
+    height: 5vh;
+}
+
+.NetWarningPlaceHolder {
+    height: 5vh;
+    display: inline-block;
+}

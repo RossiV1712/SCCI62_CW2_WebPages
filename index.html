@@ -398,15 +398,21 @@
         <div class="row my-3" id="ArticleOutput">
         </div>
 
-        <div id="Pagination" class="mt-2 mb-5">
+        <div id="Pagination" class="mt-2">
             <nav aria-label="Page navigation">
                 <ul id="PageNavBar" class="pagination justify-content-center">
 
                 </ul>
             </nav>
         </div>
-        <div class="fixed-bottom alert-danger text-center">
-            <h4>Connection Error</h4>
+        <div id="DisplayError" class="row my-3" hidden>
+            <h1>ERROR</h1>
+        </div>
+        <div id="IntErrorSpacer" class="NetWarningPlaceHolder mt-2" hidden>
+            <span></span>
+        </div>
+        <div id="IntError" class="fixed-bottom alert-danger text-center NetWarning px-1" hidden>
+            <h4>Connection Error!</h4>
         </div>
     </div>
     <script src="JS/index.umd.min.js"></script> <!-- Pull to refresh -->
