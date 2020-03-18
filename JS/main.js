@@ -246,12 +246,12 @@ function FilterSubmit() {
         document.getElementById("SearchDateTo").classList.remove("is-invalid"); // Otherwise remove the class as there is no longer an error (for multiple search attempts)
     }
     CloseSettingsModal(); // Run the function to close the settings modal
-    ShowSearchAlert(); // Run the function to show the search box
     sessionStorage.setItem("FromDate", FromDate); // Store the chosen terms
     sessionStorage.setItem("ToDate", ToDate);
     sessionStorage.setItem("Search", q);
     sessionStorage.setItem("Lang", document.getElementById("SearchLangSelect").value);
     sessionStorage.setItem("SortBy", document.getElementById("SearchSort").value);
+    ShowSearchAlert(); // Run the function to show the search box
 }
 /* A function to store all of the settings submitted in the settings modal */
 function SettingsSubmit() {
