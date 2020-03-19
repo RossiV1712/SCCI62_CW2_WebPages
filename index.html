@@ -4,6 +4,8 @@
 <head>
     <title>RBV News</title>
     <meta name="description" content="Collation of news sources with search and filter ability">
+    <link id="ManifestFile" rel="manifest">
+    <meta name="theme-color" content="#000">
     <meta name="keywords" content="NEWS">
     <meta name="author" content="Ross Vernon">
     <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
@@ -53,7 +55,7 @@
                 <div class="carousel-cell"><b>Technology</b></div>
             </div>
         </div>
-        <div class="row px-0" id="SearchActive" hidden>
+        <div class="row px-0 py-1 alert alert-info" id="SearchActive" hidden>
             <div class="col-11">
                 <h5 class="m-auto">
                     Searching
@@ -402,11 +404,19 @@
                 </ul>
             </nav>
         </div>
+        <div id="DisplayError" class="row my-3" hidden>
+            <h1>ERROR</h1>
+        </div>
+        <div id="IntErrorSpacer" class="NetWarningPlaceHolder mt-2" hidden>
+            <span></span>
+        </div>
+        <div id="IntError" class="fixed-bottom alert-danger text-center NetWarning px-1" hidden>
+            <h4>Connection Error!</h4>
+        </div>
     </div>
     <script src="JS/index.umd.min.js"></script> <!-- Pull to refresh -->
     <script src="JS/popper.min.js"></script> <!-- Popper JS -->
-    <script
-  src="JS/jquery-3.4.1.min.js"></script><!-- JQuery -->
+    <script src="JS/jquery-3.4.1.min.js"></script><!-- JQuery -->
     <script src="JS/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS Bundle -->
     <script src="JS/flickity.pkgd.min.js"></script> <!-- Flickity JS -->
     <script src="JS/main.js"></script> <!-- Custom JS -->

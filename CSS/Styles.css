@@ -254,10 +254,7 @@
 }
 
 #SearchActive {
-    color: black;
-    background-color: lightyellow;
-    border-bottom: solid 2px black;
-    box-shadow: 0 2px 5px #000;
+    border-radius: 0;
 }
 
 #SettCardBot {
@@ -268,4 +265,14 @@
 #SettCardTop {
     border-top-right-radius: .25rem;
     border-top-left-radius: .25rem;
+}
+
+.NetWarning {
+    border: 2px solid #721c24;
+    height: 5vh;
+}
+
+.NetWarningPlaceHolder {
+    height: 5vh;
+    display: inline-block;
 }
