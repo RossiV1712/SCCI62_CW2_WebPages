@@ -55,12 +55,40 @@ function CloseSearchAlert() {
     RemoveSearchCell(); // Run the funtion to remove the Search cell in the navigation bar
     RefreshArticles(1); // Run the function to refresh the articles (without the serach variables)
 }
+var VarName = ['--Style1-Colour1', '--Style1-Colour2', '--Style1-Colour3'];
+var Style1 = ['000', 'EDF5E0', 'FFF'];
+var Style2 = ['FFF', '8DE4AF', '000'];
+var Style3 = ['38a832', '05396B', '16c4bc'];
 /* Update the colour css file */
 function ColourStyle() {
-    var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
-    StyleSheet.setAttribute("href", "CSS/Colour" + Colour + ".css"); // Set the stylesheet href to the stored variable
+    var ChosenStyle;
+    if (Colour == 1) {
+        ChosenStyle = Style1;
+    }
+    else if (Colour == 2) {
+        ChosenStyle = Style2;
+    }
+    else if (Colour == 3) {
+        ChosenStyle = Style3;
+    }
+    else if (Colour == 4) {
+        
+    }
+    else if (Colour == 5) {
+        
+    }
+    else if (Colour == 6) {
+        
+    }
+    var i = 0;
+    VarName.forEach(function(value, index) {
+       document.querySelector(":root").style.setProperty(value, "#" + ChosenStyle[index]);
+       console.log(index);
+    });
+    var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
+    StyleSheet.setAttribute("href", "CSS/Colour1.css"); // Set the stylesheet href to the stored variable
 }
 /* Open the initial modal for first time use */
 function OpenInitCountryModal() {

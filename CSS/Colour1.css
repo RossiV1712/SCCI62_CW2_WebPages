@@ -1,10 +1,16 @@
+:root {
+    --Style1-Colour1: #05396B;
+    --Style1-Colour2: #05396B;
+    --Style1-Colour3: #05396B;
+}
+
 .NavBarSideScroll, .TopBarHeader {
-    color: #EDF5E0;
-    background-color: #05396B;
+    color: var(--Style1-Colour2);
+    background-color: var(--Style1-Colour1);
 }
 
 #SettingsIcon {
-       color: #EDF5E0!important;
+       color: var(--Style1-Colour3)!important;
 }
 
 .carousel-cell {
