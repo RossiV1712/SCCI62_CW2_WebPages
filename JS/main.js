@@ -88,7 +88,7 @@ function ColourStyle() {
        console.log(index);
     });
     var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
-    StyleSheet.setAttribute("href", "CSS/Colour1.css"); // Set the stylesheet href to the stored variable
+    StyleSheet.setAttribute("href", "CSS/Colours.css"); // Set the stylesheet href to the stored variable
 }
 /* Open the initial modal for first time use */
 function OpenInitCountryModal() {
@@ -312,7 +312,7 @@ function OutputResults(Data) {
         var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
         var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
         var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
-        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
+        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1 ArticleCard" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
 /* Get the category name from the given value ready for XMLHttpRequest */
@@ -365,7 +365,7 @@ function RefreshArticles(Page) {
 /* Page Number */
 /* A function to take to page number given and return a button with the needed details */
 function PageNum(PageNum) {
-    return "<li class='page-item'><a id='PageNum" + PageNum + "' class='page-link' onclick='RefreshArticles(" + PageNum + ")'>" + PageNum + "</a></li>"; // Return the navigation button with required attributes based off of the given number
+    return "<li class='page-item'><a id='PageNum" + PageNum + "' class='page-link PageNumInactive' onclick='RefreshArticles(" + PageNum + ")'>" + PageNum + "</a></li>"; // Return the navigation button with required attributes based off of the given number
 }
 /* A function to configure and display the page navigation bar at bottom of the page based off of how many pages are available */
 function DisplayNavBar(Page, TotalPages) {

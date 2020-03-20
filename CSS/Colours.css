@@ -3,21 +3,163 @@
 }
 
 /* Header */
+.TopBarHeader {
+    background-color: ;
+    color: ;
+}
+
+#SettingsIcon {
+    color:  !important;
+}
+
+#NavCategoryScroll {
+    background-color: ;
+}
+
+.carousel-cell {
+    background-color: ;
+    color: ;
+}
 
 /* Article Modal */
+.ArticleModal-content {
+    color: ;
+    border: solid 2px;
+}
+
+.ArticleModal-body {
+    background-color: ;
+}
+
+#ArticleModalSource {
+    color: ;
+}
+
+.ArticleModal-footer {
+    background-color: ;
+    border-top-color: ;
+}
+
+#ArticleModalMore {
+    color: ;
+    background-color: ;
+    border: ;
+}
+
+#ArticleModalClose {
+    color: ;
+    background-color: ;
+    border: ;
+}
 
 /* Article Cards */
+.ArticleCard {
+    border: solid 2px #000;
+}
+
+.ArticleCardBody {
+    background-color: ;
+    color: ;
+}
+
+.ArticleCardFoot {
+    background-color: ;
+    color: ;
+}
 
 /* Page Navigation */
+.PageNumActive {
+    background-color: ;
+    color:  !important;
+}
+
+.PageNumInactive {
+    background-color: ;
+    color:  !important;
+}
+
+/* Configuration Modals Shared */
+#AcordianSearchHeader,
+#AcordianSettingsHeader {
+    background-color: #000;
+}
+
+#SettingsModalTitleOne,
+#SettingsModalTitleTwo {
+    color: aqua;
+}
+
+#collapseOne,
+#collapseTwo {
+    background-color: #8DE4AF;
+    color: #FFF;
+}
+
+#collapseOne input,
+#collapseOne select,
+#collapseTwo input,
+#collapseTwo select {
+    background-color: #000;
+    color: #FFF;
+}
+
+#SettingsPageSizeSlider {
+    background: #d3d3d3;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5vw;
+    border-radius: 10px;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+#SettingsPageSizeSlider::-webkit-slider-thumb {
+    background: #FFF;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+}
+
+#SettingsModalClose {
+    background-color: ;
+    color: ;
+    border: ;
+}
+
+#SettingsModalSubmit {
+    background-color: ;
+    color: ;
+    border: ;
+}
+
+/* Init Modal */
+.Initmodal-content {
+    background-color: ;
+}
+
+.Initmodal-header, .Initmodal-footer {
+    background-color: ;
+    color: ;
+}
+
+.Initmodal-body select {
+    background-color: ;
+    color: ;
+}
+
+.Initmodal-footer button {
+    background-color: ; /* ? */
+    color: ;
+    border: ;
+}
 
 /* Internet Error */
 
 /* Internet Warning Message */
 
 /* Search Alert */
-
-/* Search Modal */
-
-/* Settings Modal */
-
-/* Init Modal */
