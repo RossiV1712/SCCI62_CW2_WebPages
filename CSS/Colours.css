@@ -7,6 +7,18 @@
     --SecondaryShade2: #1c9a53;
     --Light: #FFFFFF;
     --Dark: #000000;
+    
+    --1Main: #163F58;
+    --1Sec: #F5B51B;
+    
+    --2Main: #5F011F;
+    --2Sec: #00DBDA;
+    
+    --3Main: #030F4F;
+    --3Sec: #F5A21C;
+    
+    --4Main: #7BD6BE;
+    --4Sec: #200371;
 }
 
 body {
