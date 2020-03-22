@@ -58,7 +58,7 @@ function CloseSearchAlert() {
 var VarName = ['Main', 'MainShade1', 'MainShade2', 'Secondary', 'SecondaryShade1', 'SecondaryShade2', 'Light', 'Dark'];
 var Style1 = ['05396B', '1C5082', '03213D', '5CDB94', '8ADBAE', '1C9A53', 'FFFFFF', '000000'];
 var Style2 = ['e51c1c', 'ca0c0c', 'da5151', '31c0b9', '0d928c', '4ad7d0', 'FFFFFF', '000000'];
-var Style3 = ['05396B', '1C5082', '03213D', '5CDB94', '8ADBAE', '1C9A53', 'FFFFFF', '000000'];
+var Style3 = ['163F58', '00677D', '394855', 'F5B51B', 'f7ca5d', 'C58C00', 'FFFFFF', '000000'];
 /* Update the colour css file */
 function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
