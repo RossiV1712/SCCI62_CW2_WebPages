@@ -1,110 +1,153 @@
 :root {
-    
+    --Main: #05396B;
+    --MainShade1: #1c5082;
+    --MainShade2: #03213d;
+    --Secondary: #5CDB94;
+    --SecondaryShade1: #8adbae;
+    --SecondaryShade2: #1c9a53;
+    --Light: #FFFFFF;
+    --Dark: #000000;
+}
+
+body {
+     background-color: var(--Secondary);
 }
 
 /* Header */
-.TopBarHeader {
-    background-color: ;
-    color: ;
+.TopBarHeader, #SettingsIcon {
+    background-color: var(--Main);
+    color: var(--Secondary);
 }
 
-#SettingsIcon {
-    color:  !important;
+.NavBarSideScroll {
+    background-color: var(--Main);
 }
 
 #NavCategoryScroll {
-    background-color: ;
+    background-color: var(--Light);
 }
 
 .carousel-cell {
-    background-color: ;
-    color: ;
+    background-color: var(--MainShade1);
+    color: var(--Secondary);
+    border: solid 3px var(--Dark);
 }
 
 /* Article Modal */
 .ArticleModal-content {
-    color: ;
-    border: solid 2px;
+    border: solid 4px var(--MainShade2);
+}
+
+.ArticleModal-header {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom: 0;
 }
 
 .ArticleModal-body {
-    background-color: ;
+    border-top: solid 6px var(--MainShade2);
+    border-bottom: solid 6px var(--MainShade2);
+    background-color: var(--Main);
+    color: var(--Light);
 }
 
-#ArticleModalSource {
-    color: ;
+#ArticleModalSource, #ArticleModalDate {
+    color: var(--Secondary)!important;
 }
 
 .ArticleModal-footer {
-    background-color: ;
-    border-top-color: ;
+    background-color: var(--MainShade1);
+    border: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 #ArticleModalMore {
-    color: ;
-    background-color: ;
-    border: ;
+    color: var(--MainShade1);
+    background-color: var(--SecondaryShade2);
+    border: solid 2px var(--Light);
 }
 
 #ArticleModalClose {
-    color: ;
-    background-color: ;
-    border: ;
+    color: var(--MainShade1);
+    background-color: var(--SecondaryShade2);
+    border: solid 2px var(--Light);
 }
 
 /* Article Cards */
 .ArticleCard {
-    border: solid 2px #000;
+    border: solid 3px var(--MainShade2);
 }
 
 .ArticleCardBody {
-    background-color: ;
-    color: ;
+    border-top: solid 3px var(--MainShade2);
+    border-bottom: solid 3px var(--MainShade2);
+    background-color: var(--Main);
+    color: var(--Secondary);
 }
 
 .ArticleCardFoot {
-    background-color: ;
-    color: ;
+    background-color: var(--MainShade1);
+    color: var(--SecondaryShade2)!important;
 }
 
 /* Page Navigation */
+
 .PageNumActive {
-    background-color: ;
-    color:  !important;
+    text-decoration: none;
+    background-color: var(--Main)!important;
+    color:  var(--Secondary)!important;
+    border: solid 1px var(--Light)
 }
 
 .PageNumInactive {
-    background-color: ;
-    color:  !important;
+    text-decoration: none;
+    background-color: var(--Secondary);
+    color:  var(--Main);
+    border: solid 1px var(--Dark);
 }
 
 /* Configuration Modals Shared */
+#FullAcordian {
+    border-radius: .25rem;
+}
+
+#FullAcordian .card {
+    border: 0;
+}
+
 #AcordianSearchHeader,
 #AcordianSettingsHeader {
-    background-color: #000;
+    background-color: var(--Main);
+    border: solid 2px var(--Dark);
 }
 
 #SettingsModalTitleOne,
 #SettingsModalTitleTwo {
-    color: aqua;
+    color: var(--Secondary);
 }
 
 #collapseOne,
 #collapseTwo {
-    background-color: #8DE4AF;
-    color: #FFF;
+    background-color: var(--SecondaryShade1);
+    color: var(--Main);
+    border: solid 2px var(--Dark);
 }
 
 #collapseOne input,
 #collapseOne select,
 #collapseTwo input,
 #collapseTwo select {
-    background-color: #000;
-    color: #FFF;
+    border: solid 2px var(--Dark);
+    background-color: var(--MainShade2);
+    color: var(--Light);
+}
+
+#collapseOne ::placeholder {
+    color: var(--Light);
 }
 
 #SettingsPageSizeSlider {
-    background: #d3d3d3;
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -117,7 +160,7 @@
 }
 
 #SettingsPageSizeSlider::-webkit-slider-thumb {
-    background: #FFF;
+    background: var(--Light);
     -webkit-appearance: none;
     appearance: none;
     width: 7vw;
@@ -125,37 +168,43 @@
     border-radius: 50%;
 }
 
-#SettingsModalClose {
-    background-color: ;
-    color: ;
-    border: ;
+.SettingsModalClose {
+    background-color: var(--MainShade1);
+    color: var(--Light);
+    border: solid 2px var(--Dark);
 }
 
-#SettingsModalSubmit {
-    background-color: ;
-    color: ;
-    border: ;
+.SettingsModalSubmit {
+    background-color: var(--MainShade1);
+    color: var(--Light);
+    border: solid 2px var(--Dark);
 }
 
 /* Init Modal */
 .Initmodal-content {
-    background-color: ;
+    background-color: var(--Secondary);
+    color: var(--Main);
+}
+
+#SubInitText {
+    color: var(--MainShade2)!important;
 }
 
 .Initmodal-header, .Initmodal-footer {
-    background-color: ;
-    color: ;
+    background-color: var(--Main);
+    color: var(--Secondary);
 }
 
 .Initmodal-body select {
-    background-color: ;
-    color: ;
+    background-color: var(--Light);
+    color: var(--Main);
+    border: solid 2px var(--Dark);
 }
 
 .Initmodal-footer button {
-    background-color: ; /* ? */
-    color: ;
-    border: ;
+    background-color: var(--Secondary); /* ? */
+    color: var(--Main);
+    border: solid 2px var(--Light);
 }
 
 /* Internet Error */

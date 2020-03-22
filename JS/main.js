@@ -55,10 +55,10 @@ function CloseSearchAlert() {
     RemoveSearchCell(); // Run the funtion to remove the Search cell in the navigation bar
     RefreshArticles(1); // Run the function to refresh the articles (without the serach variables)
 }
-var VarName = ['--Style1-Colour1', '--Style1-Colour2', '--Style1-Colour3'];
-var Style1 = ['000', 'EDF5E0', 'FFF'];
-var Style2 = ['FFF', '8DE4AF', '000'];
-var Style3 = ['38a832', '05396B', '16c4bc'];
+var VarName = ['Main', 'MainShade1', 'MainShade2', 'Secondary', 'SecondaryShade1', 'SecondaryShade2', 'Light', 'Dark'];
+var Style1 = ['05396B', '1C5082', '03213D', '5CDB94', '8ADBAE', '1C9A53', 'FFFFFF', '000000'];
+var Style2 = ['e51c1c', 'ca0c0c', 'da5151', '31c0b9', '0d928c', '4ad7d0', 'FFFFFF', '000000'];
+var Style3 = ['05396B', '1C5082', '03213D', '5CDB94', '8ADBAE', '1C9A53', 'FFFFFF', '000000'];
 /* Update the colour css file */
 function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
@@ -84,8 +84,7 @@ function ColourStyle() {
     }
     var i = 0;
     VarName.forEach(function(value, index) {
-       document.querySelector(":root").style.setProperty(value, "#" + ChosenStyle[index]);
-       console.log(index);
+       document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]);
     });
     var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
     StyleSheet.setAttribute("href", "CSS/Colours.css"); // Set the stylesheet href to the stored variable
@@ -312,7 +311,7 @@ function OutputResults(Data) {
         var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
         var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
         var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
-        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1 ArticleCard" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
+        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1 ArticleCard" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap">' + Source + '</div><div class="ArticleDate text-wrap">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
 /* Get the category name from the given value ready for XMLHttpRequest */
@@ -373,11 +372,11 @@ function DisplayNavBar(Page, TotalPages) {
     var PageOutput = ""; // Create an empty String for storage of output
     NavBar.innerHTML = ""; // Clear the navbar to allow full update / removal
     /* Set the common button values to variables to minimise code needed */
-    var Prev = "<li class='page-item'><a id='PagePrev' class='page-link' onclick='RefreshArticles(" + (Page - 1) + ")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
-    var Page1 = "<li class='page-item'><a id='PageNum1' class='page-link' onclick='RefreshArticles(1)'>1</a></li>";
-    var PageFiller = "<li class='page-item'><a class='page-link'>...</a></li>";
-    var LastPage = "<li class='page-item'><a id='PageNum" + TotalPages + "' class='page-link' onclick='RefreshArticles(" + TotalPages + ")'>" + TotalPages + "</a></li>";
-    var Next = "<li class='page-item'><a id='PageNext' class='page-link' onclick='RefreshArticles(" + (Page + 1) + ")' aria-label='Previous'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Previous</span></a></li>";
+    var Prev = "<li class='page-item'><a id='PagePrev' class='page-link PageNumInactive' onclick='RefreshArticles(" + (Page - 1) + ")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
+    var Page1 = "<li class='page-item'><a id='PageNum1' class='page-link PageNumInactive' onclick='RefreshArticles(1)'>1</a></li>";
+    var PageFiller = "<li class='page-item'><a class='page-link PageNumInactive'>...</a></li>";
+    var LastPage = "<li class='page-item'><a id='PageNum" + TotalPages + "' class='page-link PageNumInactive' onclick='RefreshArticles(" + TotalPages + ")'>" + TotalPages + "</a></li>";
+    var Next = "<li class='page-item'><a id='PageNext' class='page-link PageNumInactive' onclick='RefreshArticles(" + (Page + 1) + ")' aria-label='Previous'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Previous</span></a></li>";
     if (Page == 1) { // If it is the first page
         PageOutput += Page1 + PageNum(2); // Show the first and second page buttons
         if (TotalPages > 2 && TotalPages <= 5) { // Of there are more than 2 pages but less than 5
