@@ -69,14 +69,42 @@ function CloseSearchAlert() {
     RemoveSearchCell(); // Run the funtion to remove the Search cell in the navigation bar
     RefreshArticles(1); // Run the function to refresh the articles (without the serach variables)
 }
+var VarName = ['Main', 'MainShade1', 'MainShade2', 'Secondary', 'SecondaryShade1', 'SecondaryShade2', 'Light', 'Dark'];
+var Style1 = ['163F58', '00677D', '394855', 'F5B51B', 'f7ca5d', 'C58C00', 'FFFFFF', '000000'];
+var Style2 = ['F5A21C', 'FFDC5C', 'BD7300', '030F4F', '030F4F', '484554', 'FFFFFF', '000000'];
+var Style3 = ['e51c1c', 'ca0c0c', 'da5151', '31c0b9', '0d928c', '4ad7d0', 'FFFFFF', '000000'];
+var Style4 = ['7EDEC2', '5FBFB6', '98B0A8', '200371', '0094CF', '4B4453', '000000', 'FFFFFF'];
+var Style5 = ['200371', '0094CF', '4B4453', '7EDEC2', '5FBFB6', '98B0A8', '000000', 'FFFFFF'];
+var Style6 = ['5F011F', '8C3242', '554149', '00DBDA', '95B1B0', '44E6CE', 'FFFFFF', '000000'];
 /* Update the colour css file */
 function ColourStyle() {
-    var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
-    var ManifestFile = document.getElementById("ManifestFile"); // Store the manifest element
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
-    StyleSheet.setAttribute("href", "CSS/Colour" + Colour + ".css"); // Set the stylesheet href to the stored variable
-    ManifestFile.setAttribute("href", "manifest" + Colour + ".json"); // Set the manifest href to the stored variable
+    var ChosenStyle;
+    if (Colour == 1) {
+        ChosenStyle = Style1;
+    }
+    else if (Colour == 2) {
+        ChosenStyle = Style2;
+    }
+    else if (Colour == 3) {
+        ChosenStyle = Style3;
+    }
+    else if (Colour == 4) {
+        ChosenStyle = Style4;
+    }
+    else if (Colour == 5) {
+        ChosenStyle = Style5;
+    }
+    else if (Colour == 6) {
+        ChosenStyle = Style6;
+    }
+    var i = 0;
+    VarName.forEach(function(value, index) {
+       document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]);
+    });
+    var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
+    StyleSheet.setAttribute("href", "CSS/Colours.css"); // Set the stylesheet href to the stored variable
 }
 /*  */
 function ShowDisplayError() {
@@ -105,7 +133,7 @@ function OpenInitCountryModal() {
         if (event.target == Initmodal) { // If the window clicked is the modal class (whole screen except actual modal)
             InitSelectLang(); // Function to get the selected country
         }
-    }
+ pc   }
 }
 /* Store the chosen settings from the initial modal in local storage */
 function InitSelectLang() {
@@ -316,7 +344,7 @@ function OutputResults(Data) {
         var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
         var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
         var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
-        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap text-muted">' + Source + '</div><div class="ArticleDate text-wrap text-muted">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
+        OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1 ArticleCard" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap">' + Source + '</div><div class="ArticleDate text-wrap">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
 /* Get the category name from the given value ready for XMLHttpRequest */
@@ -391,7 +419,7 @@ function RefreshArticles(Page) {
 /* Page Number */
 /* A function to take to page number given and return a button with the needed details */
 function PageNum(PageNum) {
-    return "<li class='page-item'><a id='PageNum" + PageNum + "' class='page-link' onclick='RefreshArticles(" + PageNum + ")'>" + PageNum + "</a></li>"; // Return the navigation button with required attributes based off of the given number
+    return "<li class='page-item'><a id='PageNum" + PageNum + "' class='page-link PageNumInactive' onclick='RefreshArticles(" + PageNum + ")'>" + PageNum + "</a></li>"; // Return the navigation button with required attributes based off of the given number
 }
 /* A function to configure and display the page navigation bar at bottom of the page based off of how many pages are available */
 function DisplayNavBar(Page, TotalPages) {
@@ -399,11 +427,11 @@ function DisplayNavBar(Page, TotalPages) {
     var PageOutput = ""; // Create an empty String for storage of output
     NavBar.innerHTML = ""; // Clear the navbar to allow full update / removal
     /* Set the common button values to variables to minimise code needed */
-    var Prev = "<li class='page-item'><a id='PagePrev' class='page-link' onclick='RefreshArticles(" + (Page - 1) + ")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
-    var Page1 = "<li class='page-item'><a id='PageNum1' class='page-link' onclick='RefreshArticles(1)'>1</a></li>";
-    var PageFiller = "<li class='page-item'><a class='page-link'>...</a></li>";
-    var LastPage = "<li class='page-item'><a id='PageNum" + TotalPages + "' class='page-link' onclick='RefreshArticles(" + TotalPages + ")'>" + TotalPages + "</a></li>";
-    var Next = "<li class='page-item'><a id='PageNext' class='page-link' onclick='RefreshArticles(" + (Page + 1) + ")' aria-label='Previous'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Previous</span></a></li>";
+    var Prev = "<li class='page-item'><a id='PagePrev' class='page-link PageNumInactive' onclick='RefreshArticles(" + (Page - 1) + ")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>";
+    var Page1 = "<li class='page-item'><a id='PageNum1' class='page-link PageNumInactive' onclick='RefreshArticles(1)'>1</a></li>";
+    var PageFiller = "<li class='page-item'><a class='page-link PageNumInactive'>...</a></li>";
+    var LastPage = "<li class='page-item'><a id='PageNum" + TotalPages + "' class='page-link PageNumInactive' onclick='RefreshArticles(" + TotalPages + ")'>" + TotalPages + "</a></li>";
+    var Next = "<li class='page-item'><a id='PageNext' class='page-link PageNumInactive' onclick='RefreshArticles(" + (Page + 1) + ")' aria-label='Previous'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Previous</span></a></li>";
     if (Page == 1) { // If it is the first page
         PageOutput += Page1 + PageNum(2); // Show the first and second page buttons
         if (TotalPages > 2 && TotalPages <= 5) { // Of there are more than 2 pages but less than 5

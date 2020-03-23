@@ -42,7 +42,6 @@
 
 /* The Close Button */
 .Initclose {
-    color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -230,30 +229,248 @@
 }
 
 #ColourOption1 {
-    color: #05396B;
+    color: #163F58;
 }
 
 #ColourOption2 {
-    color: #FC4444;
-}
-
-#ColourOption6 {
-    color: #C7493A;
-}
-
-#ColourOption5 {
-    color: #5D5C61;
-}
-
-#ColourOption4 {
-    color: #0C0032;
+    color: #F5A21C;
 }
 
 #ColourOption3 {
-    color: #0B0C10;
+    color: #e51c1c;
 }
 
+#ColourOption4 {
+    color: #7EDEC2;
+}
+
+#ColourOption5 {
+    color: #200371;
+}
+
+#ColourOption6 {
+    color: #5F011F;
+}
+
+/* Colour Styles */
+/* General */
+:root {
+    --Main: #163F58;
+    --MainShade1: #00677D;
+    --MainShade2: #394855;
+    --Secondary: #F5B51B;
+    --SecondaryShade1: #f7ca5d;
+    --SecondaryShade2: #C58C00;
+    --Light: #FFFFFF;
+    --Dark: #000000;
+}
+
+body {
+     background-color: var(--Secondary);
+}
+
+/* Header */
+.TopBarHeader, #SettingsIcon {
+    background-color: var(--Main);
+    color: var(--Secondary);
+}
+
+.NavBarSideScroll {
+    background-color: var(--Main);
+}
+
+#NavCategoryScroll {
+    background-color: #FFFFFF;
+}
+
+.carousel-cell {
+    background-color: var(--MainShade1);
+    color: var(--Secondary);
+    border: solid 3px #000000;
+}
+
+/* Article Modal */
+.ArticleModal-content {
+    border: solid 4px var(--MainShade2);
+}
+
+.ArticleModal-header {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom: 0;
+}
+
+.ArticleModal-body {
+    border-top: solid 6px var(--MainShade2);
+    border-bottom: solid 6px var(--MainShade2);
+    background-color: var(--Main);
+    color: var(--Light);
+}
+
+#ArticleModalSource, #ArticleModalDate {
+    color: var(--Secondary)!important;
+}
+
+.ArticleModal-footer {
+    background-color: var(--MainShade1);
+    border: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#ArticleModalMore {
+    color: var(--MainShade1);
+    background-color: var(--SecondaryShade2);
+    border: solid 2px var(--Light);
+}
+
+#ArticleModalClose {
+    color: var(--MainShade1);
+    background-color: var(--SecondaryShade2);
+    border: solid 2px var(--Light);
+}
+
+/* Article Cards */
+.ArticleCard {
+    border: solid 3px var(--MainShade2);
+}
+
+.ArticleCardBody {
+    border-top: solid 3px var(--MainShade2);
+    border-bottom: solid 3px var(--MainShade2);
+    background-color: var(--Main);
+    color: var(--Secondary);
+}
+
+.ArticleCardFoot {
+    background-color: var(--MainShade1);
+    color: var(--SecondaryShade2)!important;
+}
+
+/* Page Navigation */
+.PageNumInactive {
+    text-decoration: none;
+    background-color: var(--Secondary);
+    color:  var(--Main)!important;
+    border: solid 1px var(--Dark);
+}
+
+.PageNumActive {
+    text-decoration: none;
+    background-color: var(--Main)!important;
+    color:  var(--Secondary)!important;
+}
+
+/* Configuration Modals Shared */
+#FullAcordian {
+    border-radius: .25rem;
+}
+
+#FullAcordian .card {
+    border: 0;
+}
+
+#AcordianSearchHeader,
+#AcordianSettingsHeader {
+    background-color: var(--Main);
+    border: solid 2px var(--Dark);
+}
+
+#SettingsModalTitleOne,
+#SettingsModalTitleTwo {
+    color: var(--Secondary);
+}
+
+#collapseOne,
+#collapseTwo {
+    background-color: var(--SecondaryShade1);
+    color: var(--Main);
+    border: solid 2px var(--Dark);
+}
+
+#collapseOne input,
+#collapseOne select,
+#collapseTwo input,
+#collapseTwo select {
+    border: solid 2px var(--Dark);
+    background-color: var(--MainShade2);
+    color: var(--Light);
+}
+
+#collapseOne ::placeholder {
+    color: var(--Light);
+}
+
+#SettingsPageSizeSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5vw;
+    border-radius: 10px;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+#SettingsPageSizeSlider::-webkit-slider-thumb {
+    background: var(--Light);
+    -webkit-appearance: none;
+    appearance: none;
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+}
+
+.SettingsModalClose {
+    background-color: var(--MainShade1);
+    color: var(--Light);
+    border: solid 2px var(--Dark);
+}
+
+.SettingsModalSubmit {
+    background-color: var(--MainShade1);
+    color: var(--Light);
+    border: solid 2px var(--Dark);
+}
+
+/* Init Modal */
+.Initmodal-content {
+    background-color: var(--Secondary);
+    color: var(--Main);
+}
+
+#SubInitText {
+    color: var(--MainShade2)!important;
+}
+
+.Initmodal-header, .Initmodal-footer {
+    background-color: var(--Main);
+    color: var(--Secondary);
+}
+
+.Initmodal-body select {
+    background-color: var(--Light);
+    color: var(--Main);
+    border: solid 2px var(--Dark);
+}
+
+.Initmodal-footer button {
+    background-color: var(--Secondary); /* ? */
+    color: var(--Main);
+    border: solid 2px var(--Light);
+}
+
+/* Internet Error */
+
+/* Internet Warning Message */
+
+/* Search Alert */
 #SearchActive {
+    color: var(--Secondary);
+    background-color: var(--Main);
+    border-bottom: solid 2px black;
+    box-shadow: 0 2px 5px #000;
     border-radius: 0;
 }
 

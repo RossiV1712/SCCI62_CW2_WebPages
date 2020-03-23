@@ -28,7 +28,7 @@
     <link href="CSS/bootstrap.min.css" rel="stylesheet">
     <link href="CSS/flickity.min.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS/Styles.css">
-    <link id="Colour" rel="stylesheet">
+    <link id="Colour" rel="stylesheet" href="CSS/Colours.css">
     <link rel="stylesheet" href="CSS/all.min.css">
 </head>
 
@@ -156,7 +156,7 @@
         </div>
     </div>
 
-    <div id="Main" class="container-fluid mt-2">
+    <div id="Main" class="container-fluid my-2">
         <div id="SettingsModal" class="modal w-100">
             <div class="modal-content SettingsModal-content">
                 <div class="modal-body SettingsModal-body p-0">
@@ -223,10 +223,10 @@
                                     </div>
                                     <div class="col-12 row mt-2">
                                         <div class="col text-center">
-                                            <button class="mx-auto btn" type="submit" onclick="CloseSettingsModal()">Cancel</button>
+                                            <button class="mx-auto btn SettingsModalClose" type="button" onclick="CloseSettingsModal()">Cancel</button>
                                         </div>
                                         <div class="col text-center">
-                                            <button class="mx-auto btn" type="submit" onclick="FilterSubmit()">Search!</button>
+                                            <button class="mx-auto btn SettingsModalSubmit" type="button" onclick="FilterSubmit()">Search!</button>
                                         </div>
                                     </div>
                                 </div>
@@ -349,17 +349,14 @@
                                     </div>
                                     <div class="col-12 row">
                                         <div class="col text-center">
-                                            <button type="button" class="btn" onclick="CloseSettingsModal()">Close</button>
+                                            <button type="button" class="btn SettingsModalClose" onclick="CloseSettingsModal()">Close</button>
                                         </div>
                                         <div class="col text-center">
-                                            <button type="button" class="btn" onclick="SettingsSubmit()">Save</button>
+                                            <button type="button" class="btn SettingsModalSubmit" onclick="SettingsSubmit()">Save</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer SettingsModal-footer">
-
                         </div>
                     </div>
                 </div>
@@ -369,9 +366,9 @@
         <div id="ArticleModal" class="modal">
             <div class="modal-content ArticleModal-content">
                 <div class="modal-header p-0 ArticleModal-header">
-                    <img class="img-fluid rounded-top" id="ArticleModalImage" onerror="CheckImage(this)">
+                    <img class="img-fluid" id="ArticleModalImage" onerror="CheckImage(this)">
                 </div>
-                <div class="modal-body ArticleModal-body">
+                <div class="modal-body ArticleModal-body px-4">
                     <div class="row">
                         <div class="col-12 px-0">
                             <h6 class="text-muted" id="ArticleModalSource"></h6>
@@ -428,8 +425,5 @@
                 RefreshArticles(1);
             }
         });
-
     </script>
-</body>
-
-</html>
+</body></html>
