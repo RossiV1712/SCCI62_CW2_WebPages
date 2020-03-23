@@ -56,15 +56,17 @@ function CloseSearchAlert() {
     RefreshArticles(1); // Run the function to refresh the articles (without the serach variables)
 }
 var VarName = ['Main', 'MainShade1', 'MainShade2', 'Secondary', 'SecondaryShade1', 'SecondaryShade2', 'Light', 'Dark'];
-var Style5 = ['05396B', '1C5082', '03213D', '5CDB94', '8ADBAE', '1C9A53', 'FFFFFF', '000000'];
-var Style6 = ['e51c1c', 'ca0c0c', 'da5151', '31c0b9', '0d928c', '4ad7d0', 'FFFFFF', '000000'];
-var Style3 = ['163F58', '00677D', '394855', 'F5B51B', 'f7ca5d', 'C58C00', 'FFFFFF', '000000'];
+var Style1 = ['163F58', '00677D', '394855', 'F5B51B', 'f7ca5d', 'C58C00', 'FFFFFF', '000000'];
+var Style2 = ['F5A21C', 'FFDC5C', 'BD7300', '030F4F', '030F4F', '484554', 'FFFFFF', '000000'];
+var Style3 = ['e51c1c', 'ca0c0c', 'da5151', '31c0b9', '0d928c', '4ad7d0', 'FFFFFF', '000000'];
+var Style4 = ['7EDEC2', '5FBFB6', '98B0A8', '200371', '0094CF', '4B4453', '000000', 'FFFFFF'];
+var Style5 = ['200371', '0094CF', '4B4453', '7EDEC2', '5FBFB6', '98B0A8', '000000', 'FFFFFF'];
+var Style6 = ['5F011F', '8C3242', '554149', '00DBDA', '95B1B0', '44E6CE', 'FFFFFF', '000000'];
 /* Update the colour css file */
 function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
     var ChosenStyle;
-    
     if (Colour == 1) {
         ChosenStyle = Style1;
     }
@@ -75,13 +77,13 @@ function ColourStyle() {
         ChosenStyle = Style3;
     }
     else if (Colour == 4) {
-        
+        ChosenStyle = Style4;
     }
     else if (Colour == 5) {
-        
+        ChosenStyle = Style5;
     }
     else if (Colour == 6) {
-        
+        ChosenStyle = Style6;
     }
     var i = 0;
     VarName.forEach(function(value, index) {

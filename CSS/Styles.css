@@ -229,28 +229,29 @@
 }
 
 #ColourOption1 {
-    color: #05396B;
+    color: #163F58;
 }
 
 #ColourOption2 {
-    color: #FC4444;
-}
-
-#ColourOption6 {
-    color: #C7493A;
-}
-
-#ColourOption5 {
-    color: #5D5C61;
-}
-
-#ColourOption4 {
-    color: #0C0032;
+    color: #F5A21C;
 }
 
 #ColourOption3 {
-    color: #0B0C10;
+    color: #e51c1c;
 }
+
+#ColourOption4 {
+    color: #7EDEC2;
+}
+
+#ColourOption5 {
+    color: #200371;
+}
+
+#ColourOption6 {
+    color: #5F011F;
+}
+
 
 #SearchActive {
     color: black;

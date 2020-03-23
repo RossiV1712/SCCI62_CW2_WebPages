@@ -7,18 +7,6 @@
     --SecondaryShade2: #C58C00;
     --Light: #FFFFFF;
     --Dark: #000000;
-    
-    --1Main: #163F58;
-    --1Sec: #F5B51B;
-    
-    --2Main: #5F011F;
-    --2Sec: #00DBDA;
-    
-    --3Main: #030F4F;
-    --3Sec: #F5A21C;
-    
-    --4Main: #7BD6BE;
-    --4Sec: #200371;
 }
 
 body {
@@ -36,13 +24,13 @@ body {
 }
 
 #NavCategoryScroll {
-    background-color: var(--Light);
+    background-color: #FFFFFF;
 }
 
 .carousel-cell {
     background-color: var(--MainShade1);
     color: var(--Secondary);
-    border: solid 3px var(--Dark);
+    border: solid 3px #000000;
 }
 
 /* Article Modal */
@@ -104,19 +92,17 @@ body {
 }
 
 /* Page Navigation */
+.PageNumInactive {
+    text-decoration: none;
+    background-color: var(--Secondary);
+    color:  var(--Main)!important;
+    border: solid 1px var(--Dark);
+}
 
 .PageNumActive {
     text-decoration: none;
     background-color: var(--Main)!important;
     color:  var(--Secondary)!important;
-    border: solid 1px var(--Light)
-}
-
-.PageNumInactive {
-    text-decoration: none;
-    background-color: var(--Secondary);
-    color:  var(--Main);
-    border: solid 1px var(--Dark);
 }
 
 /* Configuration Modals Shared */
