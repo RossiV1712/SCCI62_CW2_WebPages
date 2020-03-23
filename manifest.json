@@ -1,9 +1,9 @@
 {
-    "name": "RBV News2",
+    "name": "RBV News",
     "short_name": "RBVNews",
     "lang": "en-GB",
-    "theme_color": "#000",
-    "background_color": "#000",
+    "theme_color": "#163F58",
+    "background_color": "#F5B51B",
     "display": "standalone",
     "orientation": "portrait",
     "Scope": "/",

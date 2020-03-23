@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded',
         if ((Country !== null) && PossCountries.includes(Country)) { // If the Country is not null (is set) and is in the array (not out of range)
             if (sessionStorage.getItem("Searching") !== "true") { // If not searching
                 RefreshArticles(1); // Retrieve and load the articles 
+                CreatePWAInstaller();
             }
         } else { // If the Country is null (not set) or not in the array (edited)
             OpenInitCountryModal(); // Open the initial modal
@@ -80,47 +81,55 @@ var Style6 = ['5F011F', '8C3242', '554149', '00DBDA', '95B1B0', '44E6CE', 'FFFFF
 function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
-    var ChosenStyle;
-    if (Colour == 1) {
-        ChosenStyle = Style1;
+    console.log(Colour);
+    var ChosenStyle = Style1;
+    switch (Colour) {
+        case 1:
+            ChosenStyle = Style1;
+            break;
+        case 2:
+            ChosenStyle = Style2;
+            break;
+        case 3:
+            ChosenStyle = Style3;
+            break;
+        case 4:
+            ChosenStyle = Style4;
+            break;
+        case 5:
+            ChosenStyle = Style5;
+            break;
+        case 6:
+            ChosenStyle = Style6;
+            break;
     }
-    else if (Colour == 2) {
-        ChosenStyle = Style2;
-    }
-    else if (Colour == 3) {
-        ChosenStyle = Style3;
-    }
-    else if (Colour == 4) {
-        ChosenStyle = Style4;
-    }
-    else if (Colour == 5) {
-        ChosenStyle = Style5;
-    }
-    else if (Colour == 6) {
-        ChosenStyle = Style6;
-    }
-    var i = 0;
-    VarName.forEach(function(value, index) {
-       document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]);
-    });
-    var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
-    StyleSheet.setAttribute("href", "CSS/Colours.css"); // Set the stylesheet href to the stored variable
+    console.log(ChosenStyle);
+            var i = 0;
+            VarName.forEach(function (value, index) {
+                console.log(index);
+                console.log(value);
+                document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]);
+            });
+            var StyleSheet = document.getElementById("StyleSheet"); // Store the stylesheet element
+            StyleSheet.setAttribute("href", "CSS/Styles.css"); // Set the stylesheet href to the stored variable
 }
 /*  */
 function ShowDisplayError() {
     document.getElementById("DisplayError").removeAttribute("hidden"); // Remove the hidden attribute from the placeholder element
 }
+
 function HideDisplayError() {
     document.getElementById("DisplayError").setAttribute("hidden", "true"); // Add the hidden attribute to the placeholder element with the value true
 }
 /*  */
 function ShowIntErrorMessage() {
+    document.getElementById("Main").classList.add("mb-5");
     document.getElementById("IntError").removeAttribute("hidden"); // Remove the hidden attribute from the message element
-    document.getElementById("IntErrorSpacer").removeAttribute("hidden"); // Remove the hidden attribute from the message spacer element
 }
+
 function HideIntErrorMessage() {
     document.getElementById("IntError").setAttribute("hidden", "true"); // Add the hidden attribute to the message element with the value true
-    document.getElementById("IntErrorSpacer").setAttribute("hidden", "true"); // Add the hidden attribute to the message spacer element with the value true
+    document.getElementById("Main").classList.remove("mb-5");
 }
 /* Open the initial modal for first time use */
 function OpenInitCountryModal() {
@@ -133,14 +142,15 @@ function OpenInitCountryModal() {
         if (event.target == Initmodal) { // If the window clicked is the modal class (whole screen except actual modal)
             InitSelectLang(); // Function to get the selected country
         }
- pc   }
+    }
 }
 /* Store the chosen settings from the initial modal in local storage */
 function InitSelectLang() {
     localStorage.setItem("Lang", document.getElementById("InitLanguageSelect").value); // Store the current value of the Language Select dropdown in the local storage
     localStorage.setItem("Country", document.getElementById("InitCountrySelect").value); // Store the current value of the Country Select dropdown in the local storage
-    RefreshArticles(1); // Retrieve and display articles from page 1
     Initmodal.style.display = "none"; // Hide the initial select modal
+    RefreshArticles(1); // Retrieve and display articles from page 1
+    CreatePWAInstaller();
 }
 /* A function to hide all of the article cards and the page navigation */
 function HideCards() {
@@ -190,7 +200,7 @@ function LoadStoredSettings() {
     for (i = 0; i < SearchSortOptions.length; i++) { // For each between 0 and the length of the array - 1 (<)
         if (SearchSortOptions[i].value == SortBy) { // If the value of the element is the same as the stored value
             SearchSortOptions[i].setAttribute("selected", "true"); // Select this element
-        } 
+        }
     }
     /* Prepare variables from storage for use in the settings modal */
     var Country = (localStorage.getItem("Country") == null || PossCountries.includes(localStorage.getItem("Country")) == false) ? 'gb' : localStorage.getItem("Country"); // Variables to be stored for loading in the settigns modal, with error checking
@@ -217,7 +227,7 @@ function LoadStoredSettings() {
             SearchLangSelect[i].setAttribute("selected", "true"); // Select this element
         }
     }
-    
+
     /* Colour */
     for (i = 1; i <= document.getElementsByName("ColourSelect").length; i++) { // For each element
         document.getElementById("SettingsColourRadio" + i).removeAttribute("checked"); // Remove the selected attribute
@@ -227,7 +237,7 @@ function LoadStoredSettings() {
     }
     /* Page Size */
     var slider = document.getElementById("SettingsPageSizeSlider"); // Store the elements for the Page Size select
-    var output = document.getElementById("SettingsPageSizeDisplay"); 
+    var output = document.getElementById("SettingsPageSizeDisplay");
     slider.value = PageSize;
     output.innerHTML = slider.value; // Display the current value in the output element
     slider.oninput = function () { // Each time the value of the slider changes
@@ -343,7 +353,7 @@ function OutputResults(Data) {
         var Title = (Data.articles[i].title == null || Data.articles[i].title == "") ? 'Unknown' : Data.articles[i].title; // For each piece of data check it is not null or empty ("") and if so output as 'Unknown' or the replacement image, if not then run the format function if needed and store the required data
         var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
         var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
-        var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ?  'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
+        var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ? 'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
         OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1 ArticleCard" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap">' + Source + '</div><div class="ArticleDate text-wrap">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
@@ -356,13 +366,17 @@ function GetCategory(i) {
     }
 }
 /* News API GET request with required elements */
-function RetrieveNews(Page, callback) { 
+function RetrieveNews(Page, Live, callback) {
+    if (Live == 0) {
+        callback();
+    }
     var Category = sessionStorage.getItem("Category") == null ? "" : GetCategory(sessionStorage.getItem("Category")); // Retrieve the category from the local storage
     SelectedCountry = localStorage.getItem("Country") == null ? "gb" : localStorage.getItem("Country"); // Retrieve the Country from the local storage
     PageSize = localStorage.getItem("PageSize"); // Retrieve the chosen Page Size from the local storage
     var NewsRequest = new XMLHttpRequest(); // Create a new XMLhttp request and store to variable
     NewsRequest.onreadystatechange = function () { // On a change in the ready state of the XMLhttp request
         if (this.readyState == 4 && this.status == 200) { // If the readyState of the request is complete and the status means that the request was successful
+            ShowCards();
             ReturnedData = JSON.parse(this.response); // Parse the JSON response and store it so it is available everywhere
             ReturnedDataCategory = Category; // Store the current category globally
             ReturnedDataPage = Page; // Store the current page globally
@@ -387,20 +401,18 @@ function RetrieveNews(Page, callback) {
     }
     NewsRequest.open('GET', APIRequestURL, true); // Open the API request with the method GET and the prepared string
     NewsRequest.send(); // Send the API request
-    NewsRequest.onerror = function() {
+    NewsRequest.onerror = function () {
         console.log("Article retrieval failed - No Internet Connection.");
         if (ReturnedData !== undefined && Category == ReturnedDataCategory) { // If there is stored data in ReturnedData and it is for the current category
             if (Page == ReturnedDataPage) { // If this is the stored page
                 console.log("Show Stored Articles");
                 HideDisplayError(); // Hide the placeholder
                 callback(); // Run the callback to output the articles
-            }
-            else { // If this is not the stored page
+            } else { // If this is not the stored page
                 console.log("Page Out Of Reach");
                 RefreshArticles(ReturnedDataPage); // Run the RefreshArticles function again, but on the correct page
             }
-        }
-        else { // If this is not the stored category or there is no stored data in ReturnedData
+        } else { // If this is not the stored category or there is no stored data in ReturnedData
             HideCards(); // Hide all of the cards
             ShowDisplayError(); // Show the placeholder
         }
@@ -411,7 +423,7 @@ function RetrieveNews(Page, callback) {
 function RefreshArticles(Page) {
     var OutputArea = document.getElementById("ArticleOutput"); // Declare and store the element for articles to be in
     OutputArea.innerHTML = ""; // Clear the area for articles
-    RetrieveNews(Page, // Retrieve the articles based on the SelectedCountry
+    RetrieveNews(Page, 1, // Retrieve the articles based on the SelectedCountry
         function () { // Wait for a callback from the retrieve
             OutputResults(ReturnedData) // Output the results (Waiting means the results are returned and stored before being output to avoid errors)
         });
@@ -524,7 +536,7 @@ function InitialiseCatSelection() {
 function CreateSearchCell() {
     var $carousel = $('.carousel').flickity(); // Select the carousel
     var $cellElem = $('#SearchCell'); // Select the search cell from the id
-    if (sessionStorage.getItem("Searching") && $cellElem.length == 0){ // If the session storage variable "Searching" is true and the $cellElem length == 0 (an object was not found)
+    if (sessionStorage.getItem("Searching") && $cellElem.length == 0) { // If the session storage variable "Searching" is true and the $cellElem length == 0 (an object was not found)
         var $cellElem = $('<div id="SearchCell" class="carousel-cell"><b>Search</b></div>'); // Set the element html
         $carousel.flickity('insert', $cellElem, 0); // Insert the new cell into index 0
         $carousel.flickity('select', 0); // Select the new cell
@@ -536,3 +548,39 @@ function RemoveSearchCell() {
     var $cellElem = $('#SearchCell'); // Select the cell from the id
     $carousel.flickity('remove', $cellElem); // Remove the cell
 }
+
+
+
+var deferredPrompt;
+var addDisp = document.getElementById("PWAInstallBar");
+var addBttn = document.getElementById("InstallPWABut");
+addDisp.style.display = 'none';
+
+function CreatePWAInstaller() {
+    // Update UI to notify the user they can add to home screen
+    addDisp.style.display = 'block';
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+
+    addBttn.addEventListener('click', (e) => {
+        alert("a");
+        // hide our user interface that shows our A2HS button
+        addDisp.style.display = 'none';
+        // Show the prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+            } else {
+                console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+        });
+    });
+});

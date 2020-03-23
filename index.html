@@ -4,7 +4,7 @@
 <head>
     <title>RBV News</title>
     <meta name="description" content="Collation of news sources with search and filter ability">
-    <link id="ManifestFile" rel="manifest">
+    <link id="ManifestFile" rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000">
     <meta name="keywords" content="NEWS">
     <meta name="author" content="Ross Vernon">
@@ -27,24 +27,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="CSS/bootstrap.min.css" rel="stylesheet">
     <link href="CSS/flickity.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/Styles.css">
-    <link id="Colour" rel="stylesheet" href="CSS/Colours.css">
+    <link id="StyleSheet" rel="stylesheet" href="CSS/Styles.css">
     <link rel="stylesheet" href="CSS/all.min.css">
 </head>
 
 <body>
-    <div class="sticky-top top-bar w-100 px-3">
-        <div class="row align-middle TopBarHeader">
+    <div class="sticky-top top-bar w-100 px-0">
+        <div class="row align-middle TopBarHeader px-0">
             <div class="col-10 px-auto py-2">
                 <h1 class="text-center" id="TopMainTitle">RBVnews</h1>
             </div>
             <div class="col-2 px-2 py-2 d-flex align-items-middle">
-                <button onclick="OpenSettingsModal()" type="button" class="btn p-0" data-toggle="button" aria-label="Settings" aria-pressed="false" autocomplete="off">
+                <button onclick="OpenSettingsModal()" type="button" class="btn p-0" aria-label="Settings" aria-pressed="false" autocomplete="off">
                     <i class="fas fa-sliders-h fa-2x" id="SettingsIcon"></i>
                 </button>
             </div>
         </div>
-        <div class="row NavBarSideScroll">
+        <div class="row NavBarSideScroll px-0">
             <div id="NavCategoryScroll" class="carousel col-11 mx-auto my-1 pt-1">
                 <div class="carousel-cell"><b>Local</b></div>
                 <div class="carousel-cell"><b>Business</b></div>
@@ -55,16 +54,27 @@
                 <div class="carousel-cell"><b>Technology</b></div>
             </div>
         </div>
-        <div class="row px-0 py-1 alert alert-info" id="SearchActive" hidden>
-            <div class="col-11">
+        <div class="row py-2 alert alert-info px-1" id="SearchActive" hidden>
+            <div class="col-11 text-center px-0">
                 <h5 class="m-auto">
                     Searching
                 </h5>
             </div>
-            <div class="col-1">
-                <button type="button" class="close my-auto" aria-label="Close Search Alert" onclick="CloseSearchAlert()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="col-1 text-center">
+                    <i class="fas fa-times-circle close" aria-label="Close Search Alert" onclick="CloseSearchAlert()"></i>
+            </div>
+        </div>
+        <div class="row py-2 alert alert-secondary px-1" id="PWAInstallBar">
+            <div class="col-2 text-center px-0">
+                <button id="InstallPWABut" onclick="function() {alert('B')}">s</button>
+            </div>
+            <div class="col-9 text-center px-0">
+                <h5 class="m-auto">
+                    Searching
+                </h5>
+            </div>
+            <div class="col-1 text-center">
+                    <i class="fas fa-times-circle close" aria-label="Close Search Alert" onclick=""></i>
             </div>
         </div>
     </div>
@@ -216,9 +226,9 @@
                                             <label for="SearchSort">Sort by:</label>
                                         </div>
                                         <select class="form-control form-control-lg custom-select" id="SearchSort">
-                                            <option value="pub">Newest</option>
-                                            <option value="rel">Most Relevant</option>
-                                            <option value="pop">Most Popular</option>
+                                            <option value="publishedAt">Newest</option>
+                                            <option value="relevancy">Most Relevant</option>
+                                            <option value="popularity">Most Popular</option>
                                         </select>
                                     </div>
                                     <div class="col-12 row mt-2">
@@ -362,7 +372,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="ArticleModal" class="modal">
             <div class="modal-content ArticleModal-content">
                 <div class="modal-header p-0 ArticleModal-header">
@@ -401,11 +411,11 @@
                 </ul>
             </nav>
         </div>
-        <div id="DisplayError" class="row my-3" hidden>
-            <h1>ERROR</h1>
-        </div>
-        <div id="IntErrorSpacer" class="NetWarningPlaceHolder mt-2" hidden>
-            <span></span>
+        <div id="DisplayError" class="row my-3 mx-auto" hidden>
+            <div class="card col-10 mx-auto text-center alert-danger NetWarning">
+                <h3>No stored articles for this category!</h3>
+                <h6>Please try a different category or reload when there is an internet connection.</h6>
+            </div>
         </div>
         <div id="IntError" class="fixed-bottom alert-danger text-center NetWarning px-1" hidden>
             <h4>Connection Error!</h4>

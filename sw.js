@@ -3,12 +3,6 @@ var filesToCache = [
     '/',
     'index.html',
     'CSS/Styles.css',
-    'CSS/Colour1.css',
-    'CSS/Colour2.css',
-    'CSS/Colour3.css',
-    'CSS/Colour4.css',
-    'CSS/Colour5.css',
-    'CSS/Colour6.css',
     'CSS/all.min.css',
     'CSS/bootstrap.min.css',
     'CSS/flickity.min.css',
@@ -20,6 +14,8 @@ var filesToCache = [
     'JS/index.umd.min.js.map',
     'JS/jquery-3.4.1.min.js',
     'JS/popper.min.js',
+    'JS/popper.min.js.map',
+    'Images/TempImage.png',
     'favicon.ico',
     'favicon-16x16.png',
     'favicon-32x32.png',
@@ -31,8 +27,8 @@ var filesToCache = [
     'icon/icon-192x192.png',
     'icon/icon-384x384.png',
     'icon/icon-512x512.png',
-    'manifest1.json',
-    'manifest2.json'
+    'webfonts/fa-solid-900.woff2',
+    'manifest.json'
 ];
 
 /* Start the service worker and cache all of the app's content */
