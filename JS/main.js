@@ -4,22 +4,26 @@ var APIKEY = '0e2c625bcdbb4b23879ec13bf7fed0fd';
 var Initmodal = document.getElementById("InitCountrySelectModal"); // Get the Initial modal element and store globally so it can always be used
 var OutputArea = document.getElementById("ArticleOutput"); // Get the area ready for the articles to be displayed
 var ReturnedData; // Declare this variable globally to store all of the returned articles from the API
+var ReturnedDataCategory; // Declare this variable globally to store the category of the returned articles from the API
+var ReturnedDataPage; // Declare this variable globally to store the page number of the returned articles from the API
 var ScrollTop; // Store the current height of the scroll of the page before the article modal is opened, for use to scroll back to current position on article modal close
 var Categories = ["Local", "Business", "Entertainment", "Health", "Science", "Sports", "Technology"]; // An array with the name of each category
 /* A function to run when the DOM content is loaded to set up all intial settings and elements */
 document.addEventListener('DOMContentLoaded',
     (function () {
-        var Cat = parseInt(sessionStorage.getItem("Category"));
+        var Cat = parseInt(sessionStorage.getItem("Category")); // Retrieve the Category variable from session storage and store it as an integer
         if (isNaN(Cat) || ((Cat < 0 || Cat >= Categories.length))) { // Check that the sessionStorage category is an int and that it is in range
             sessionStorage.setItem("Category", 0); // If not then set session storage Category to 0
         }
-        InitialiseCatSelection();
+        InitialiseCatSelection(); // Initialise the category navigation bar
         if (isNaN(parseInt(localStorage.getItem("PageSize"))) || (localStorage.getItem("PageSize") > 50 || localStorage.getItem("PageSize") <= 0)) { // Check that the page size is an integer and that it is in range
             localStorage.setItem("PageSize", 20); // If not set local storage PageSize to 20
         }
         var Country = localStorage.getItem("Country"); // Retrieve the Country from the local storage
-        if ((Country !== null) && PossCountries.includes(Country)) { // If the Country is not null (not set) and is in the array (not edited in any way)
-            RefreshArticles(1); // Retrieve and load the articles 
+        if ((Country !== null) && PossCountries.includes(Country)) { // If the Country is not null (is set) and is in the array (not out of range)
+            if (sessionStorage.getItem("Searching") !== "true") { // If not searching
+                RefreshArticles(1); // Retrieve and load the articles 
+            }
         } else { // If the Country is null (not set) or not in the array (edited)
             OpenInitCountryModal(); // Open the initial modal
         };
@@ -29,6 +33,16 @@ document.addEventListener('DOMContentLoaded',
         }
     })
 );
+/* If the service worker exists, register it */
+window.onload = function () {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('sw.js')
+            .then(function () {
+                console.log("Service Worker Registered");
+            });
+    }
+};
 /* A function to format todays date so it can be compared to the input from the form */
 function FilterFormatDate() {
     var d = new Date(), // Create a new date variable
@@ -44,8 +58,8 @@ function FilterFormatDate() {
 /* Show the top bar to display that the search results are currently showing */
 function ShowSearchAlert() {
     document.getElementById("SearchActive").removeAttribute("hidden"); // Remove the hidden attribute from the Search box
-    CreateSearchCell(); // Run the function to create the Search cell in the navigation bar
     sessionStorage.setItem("Searching", true); // Set the session storage variable of Searching to true
+    CreateSearchCell(); // Run the function to create the Search cell in the navigation bar
     RefreshArticles(1); // Run the function to refresh the articles (with the search variables)
 }
 /* Hide the top bar to show that the search results are no longer showing */
@@ -91,6 +105,22 @@ function ColourStyle() {
     });
     var StyleSheet = document.getElementById("Colour"); // Store the stylesheet element
     StyleSheet.setAttribute("href", "CSS/Colours.css"); // Set the stylesheet href to the stored variable
+}
+/*  */
+function ShowDisplayError() {
+    document.getElementById("DisplayError").removeAttribute("hidden"); // Remove the hidden attribute from the placeholder element
+}
+function HideDisplayError() {
+    document.getElementById("DisplayError").setAttribute("hidden", "true"); // Add the hidden attribute to the placeholder element with the value true
+}
+/*  */
+function ShowIntErrorMessage() {
+    document.getElementById("IntError").removeAttribute("hidden"); // Remove the hidden attribute from the message element
+    document.getElementById("IntErrorSpacer").removeAttribute("hidden"); // Remove the hidden attribute from the message spacer element
+}
+function HideIntErrorMessage() {
+    document.getElementById("IntError").setAttribute("hidden", "true"); // Add the hidden attribute to the message element with the value true
+    document.getElementById("IntErrorSpacer").setAttribute("hidden", "true"); // Add the hidden attribute to the message spacer element with the value true
 }
 /* Open the initial modal for first time use */
 function OpenInitCountryModal() {
@@ -244,12 +274,12 @@ function FilterSubmit() {
         document.getElementById("SearchDateTo").classList.remove("is-invalid"); // Otherwise remove the class as there is no longer an error (for multiple search attempts)
     }
     CloseSettingsModal(); // Run the function to close the settings modal
-    ShowSearchAlert(); // Run the function to show the search box
     sessionStorage.setItem("FromDate", FromDate); // Store the chosen terms
     sessionStorage.setItem("ToDate", ToDate);
     sessionStorage.setItem("Search", q);
     sessionStorage.setItem("Lang", document.getElementById("SearchLangSelect").value);
     sessionStorage.setItem("SortBy", document.getElementById("SearchSort").value);
+    ShowSearchAlert(); // Run the function to show the search box
 }
 /* A function to store all of the settings submitted in the settings modal */
 function SettingsSubmit() {
@@ -326,15 +356,18 @@ function GetCategory(i) {
     }
 }
 /* News API GET request with required elements */
-function RetrieveNews(Page, callback) {
-
+function RetrieveNews(Page, callback) { 
     var Category = sessionStorage.getItem("Category") == null ? "" : GetCategory(sessionStorage.getItem("Category")); // Retrieve the category from the local storage
     SelectedCountry = localStorage.getItem("Country") == null ? "gb" : localStorage.getItem("Country"); // Retrieve the Country from the local storage
     PageSize = localStorage.getItem("PageSize"); // Retrieve the chosen Page Size from the local storage
     var NewsRequest = new XMLHttpRequest(); // Create a new XMLhttp request and store to variable
     NewsRequest.onreadystatechange = function () { // On a change in the ready state of the XMLhttp request
         if (this.readyState == 4 && this.status == 200) { // If the readyState of the request is complete and the status means that the request was successful
-            ReturnedData = JSON.parse(this.response); // parse the JSON response and store it so it is available everywhere
+            ReturnedData = JSON.parse(this.response); // Parse the JSON response and store it so it is available everywhere
+            ReturnedDataCategory = Category; // Store the current category globally
+            ReturnedDataPage = Page; // Store the current page globally
+            HideIntErrorMessage(); // The request was successful, therefore remove the internet error message
+            HideDisplayError(); // The request was successful, therefore remove the placeholder
             if (ReturnedData.totalResults > PageSize) { // If there are more results than are on 1 page
                 var PagesNeeded = Math.ceil(ReturnedData.totalResults / PageSize); // Work out how many pages are needed rounded up
                 DisplayNavBar(Page, PagesNeeded); // Configure and display nav bar based off of current page and total pages needed
@@ -354,6 +387,25 @@ function RetrieveNews(Page, callback) {
     }
     NewsRequest.open('GET', APIRequestURL, true); // Open the API request with the method GET and the prepared string
     NewsRequest.send(); // Send the API request
+    NewsRequest.onerror = function() {
+        console.log("Article retrieval failed - No Internet Connection.");
+        if (ReturnedData !== undefined && Category == ReturnedDataCategory) { // If there is stored data in ReturnedData and it is for the current category
+            if (Page == ReturnedDataPage) { // If this is the stored page
+                console.log("Show Stored Articles");
+                HideDisplayError(); // Hide the placeholder
+                callback(); // Run the callback to output the articles
+            }
+            else { // If this is not the stored page
+                console.log("Page Out Of Reach");
+                RefreshArticles(ReturnedDataPage); // Run the RefreshArticles function again, but on the correct page
+            }
+        }
+        else { // If this is not the stored category or there is no stored data in ReturnedData
+            HideCards(); // Hide all of the cards
+            ShowDisplayError(); // Show the placeholder
+        }
+        ShowIntErrorMessage(); // Since there is an error with the API request, show the internet error message
+    }
 }
 /* Retrieve and Output articles */
 function RefreshArticles(Page) {
@@ -461,7 +513,9 @@ function InitialiseCatSelection() {
         if ((sessionStorage.getItem("Searching") == 'true') && (NavBarCarousel.selectedElement.id !== 'SearchCell')) { // If searching is true and the selected cell is not the Search cell
             CloseSearchAlert(); // Close the Search alert
         } else { // Otherwise
-            RefreshArticles(1); //Refresh articles
+            if (NavBarCarousel.selectedElement.id !== 'SearchCell') { // As long as the currently selected cell is not the Search Cell
+                RefreshArticles(1); //Refresh articles
+            }
         }
     });
 
@@ -469,18 +523,12 @@ function InitialiseCatSelection() {
 /* Add the search cell to the navigation carousel at the top of the screen and scroll to it */
 function CreateSearchCell() {
     var $carousel = $('.carousel').flickity(); // Select the carousel
-    try { // Attempt to run
-        var $cellElem = $('#SearchCell'); // Select the cell from the id
+    var $cellElem = $('#SearchCell'); // Select the search cell from the id
+    if (sessionStorage.getItem("Searching") && $cellElem.length == 0){ // If the session storage variable "Searching" is true and the $cellElem length == 0 (an object was not found)
+        var $cellElem = $('<div id="SearchCell" class="carousel-cell"><b>Search</b></div>'); // Set the element html
+        $carousel.flickity('insert', $cellElem, 0); // Insert the new cell into index 0
+        $carousel.flickity('select', 0); // Select the new cell
     }
-    catch(e) { // If there is an error
-        var SearchCell = false; // Set the variable to false
-    }
-    if (sessionStorage.getItem("Searching") && SearchCell){ // If the session storage is 
-        return;
-    }
-    var $cellElem = $('<div id="SearchCell" class="carousel-cell"><b>Search</b></div>'); // Set the element html
-    $carousel.flickity('insert', $cellElem, 0); // Insert the new cell into index 0
-    $carousel.flickity('select', 0); // Select the new cell
 }
 /* Remove the search cell from the navigation carousel at the top of the screen and scroll away from it */
 function RemoveSearchCell() {
