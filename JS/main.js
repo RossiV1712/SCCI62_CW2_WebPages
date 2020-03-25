@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded',
         if ((Country !== null) && PossCountries.includes(Country)) { // If the Country is not null (is set) and is in the array (not out of range)
             if (sessionStorage.getItem("Searching") !== "true") { // If not searching
                 RefreshArticles(1); // Retrieve and load the articles 
-                CreatePWAInstaller();
             }
         } else { // If the Country is null (not set) or not in the array (edited)
             OpenInitCountryModal(); // Open the initial modal
@@ -81,7 +80,6 @@ var Style6 = ['5F011F', '8C3242', '554149', '00DBDA', '95B1B0', '44E6CE', 'FFFFF
 function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
-    console.log(Colour);
     var ChosenStyle = Style1;
     switch (Colour) {
         case 1:
@@ -103,11 +101,8 @@ function ColourStyle() {
             ChosenStyle = Style6;
             break;
     }
-    console.log(ChosenStyle);
             var i = 0;
             VarName.forEach(function (value, index) {
-                console.log(index);
-                console.log(value);
                 document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]);
             });
             var StyleSheet = document.getElementById("StyleSheet"); // Store the stylesheet element
@@ -150,7 +145,6 @@ function InitSelectLang() {
     localStorage.setItem("Country", document.getElementById("InitCountrySelect").value); // Store the current value of the Country Select dropdown in the local storage
     Initmodal.style.display = "none"; // Hide the initial select modal
     RefreshArticles(1); // Retrieve and display articles from page 1
-    CreatePWAInstaller();
 }
 /* A function to hide all of the article cards and the page navigation */
 function HideCards() {
@@ -548,39 +542,3 @@ function RemoveSearchCell() {
     var $cellElem = $('#SearchCell'); // Select the cell from the id
     $carousel.flickity('remove', $cellElem); // Remove the cell
 }
-
-
-
-var deferredPrompt;
-var addDisp = document.getElementById("PWAInstallBar");
-var addBttn = document.getElementById("InstallPWABut");
-addDisp.style.display = 'none';
-
-function CreatePWAInstaller() {
-    // Update UI to notify the user they can add to home screen
-    addDisp.style.display = 'block';
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-
-    addBttn.addEventListener('click', (e) => {
-        alert("a");
-        // hide our user interface that shows our A2HS button
-        addDisp.style.display = 'none';
-        // Show the prompt
-        deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
-            } else {
-                console.log('User dismissed the A2HS prompt');
-            }
-            deferredPrompt = null;
-        });
-    });
-});

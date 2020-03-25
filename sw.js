@@ -21,13 +21,15 @@ var filesToCache = [
     'favicon-32x32.png',
     'icon/icon-72x72.png',
     'icon/icon-96x96.png',
-    'icon/icon-128x128.png',
     'icon/icon-144x144.png',
-    'icon/icon-152x152.png',
     'icon/icon-192x192.png',
     'icon/icon-384x384.png',
     'icon/icon-512x512.png',
     'webfonts/fa-solid-900.woff2',
+    'mstile-150x150.png',
+    'apple-touch-icon.png',
+    'browserconfig.xml',
+    'safari-pinned-tab.svg',
     'manifest.json'
 ];
 

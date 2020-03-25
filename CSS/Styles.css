@@ -152,6 +152,7 @@
 }
 
 .NavBarSideScroll {
+    width: 100vw;
     border: solid 2px black;
     box-shadow: 0 5px 6px #000, 0 -5px 6px #000;
 }
@@ -484,4 +485,8 @@ body {
 .NetWarningPlaceHolder {
     height: 5vh;
     display: inline-block;
+}
+
+.top-bar {
+    z-index: 4;
 }
