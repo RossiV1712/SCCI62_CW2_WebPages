@@ -112,8 +112,6 @@ function ColourStyle() {
     VarName.forEach(function (value, index) { // For each variable in the array (each CSS variable)
         document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]); // Set each variable in css to the corresponding value (Variables start with '--' and values with '#')
     });
-    var StyleSheet = document.getElementById("StyleSheet"); // Store the stylesheet element
-    StyleSheet.setAttribute("href", "CSS/Styles.css"); // Set the stylesheet href to the stored variable
 }
 /* Show the error for the case of no articles being available */
 function ShowDisplayError() {

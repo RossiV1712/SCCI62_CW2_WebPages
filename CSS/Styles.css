@@ -1,4 +1,4 @@
-@import('SigmarOne.css');
+@import url('SigmarOne.css');
 
 /* Import the Font Awesome font from the local file  */
 @font-face {

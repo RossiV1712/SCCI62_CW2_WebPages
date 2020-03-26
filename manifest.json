@@ -1,18 +1,18 @@
 {
-    "name": "RBV News", // The full name of the application
-    "short_name": "RBVNews", // The short name of the application
-    "lang": "en-GB", // The language of the application
-    "theme_color": "#163F58", // The theme colour of the application
-    "background_color": "#F5B51B", // The background colour of the application
-    "display": "standalone", // Declare that the application is stand alone and doesn't need to run in the browser
-    "orientation": "portrait", // Declare that the application should run in portrait mode
-    "Scope": "/", // Set the default scope of the application
-    "start_url": "index.html", // Set the default starting page of the application
-    "icons": [ // Declare the icons for the application
+    "name": "RBV News",
+    "short_name": "RBVNews",
+    "lang": "en-GB",
+    "theme_color": "#163F58",
+    "background_color": "#F5B51B",
+    "display": "standalone",
+    "orientation": "portrait",
+    "Scope": "/",
+    "start_url": "index.html",
+    "icons": [
         {
-            "src": "icon/icon-72x72.png", // Link to the file
-            "sizes": "72x72", // Size of the icon
-            "type": "image/png" // Type of the icon
+            "src": "icon/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
     },
         {
             "src": "icon/icon-96x96.png",
