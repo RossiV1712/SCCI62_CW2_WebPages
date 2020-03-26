@@ -1,46 +1,64 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=en> <!-- Show that the language of the page is English -->
 
 <head>
-    <title>RBV News</title>
-    <meta name="description" content="Collation of news sources with search and filter ability">
-    <link id="ManifestFile" rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000">
-    <meta name="keywords" content="NEWS">
-    <meta name="author" content="Ross Vernon">
-    <meta name="apple-mobile-web-app-title" content="RBV News">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="apple-touch-startup-image" href="icon/icon-512x512.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192x192.png">
+    <title>RBV News</title> <!-- Set the title of the page -->
+    <meta name="description" content="Collation of news sources with search and filter ability"> <!-- Set the description of the page -->
+    <link id="ManifestFile" rel="manifest" href="manifest.json"> <!-- Link the manifest file -->
+    <meta name="keywords" content="NEWS"> <!-- Keywords to help with SEO -->
+    <meta name="author" content="Ross Vernon"> <!-- Author of the site -->
+    <meta name="mobile-web-app-capable" content="yes"> <!-- Enable web app capability (caches icons on install) -->
+    <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Enable web app capability on iOS (caches icons in install) -->
+    <meta name="apple-touch-fullscreen" content="yes"> <!-- Allow as standalone on iOS -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"> <!-- Set the style for the status bar to default -->
+    <meta name="apple-mobile-web-app-title" content="RBV News"> <!-- Set the title for iOS devices -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"> <!-- Set the icon for apple touch devices -->
+    <link rel="apple-touch-startup-image" href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- Set the splash screen images for different screen sizes for apple touch devices -->
+    <link rel="apple-touch-startup-image" href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192x192.png"> <!-- Set the icons for general use -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#ffc40d">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="CSS/bootstrap.min.css" rel="stylesheet">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5"> <!-- Set the icon for safari pinned tabs on macOS -->
+    <meta name="msapplication-TileColor" content="ffc40d"> <!-- Set the background colour for tiles on Windows -->
+    <meta name="msapplication-TileImage" content="ms-icon-144x144.png"> <!-- Set the icon for tiles on Windows -->
+    <meta name="theme-color" content="#ffffff"> <!-- Set the theme colour for the application to white -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Set the viewport width settings -->
+    <link href="CSS/bootstrap.min.css" rel="stylesheet"> <!-- Link the CSS files -->
     <link href="CSS/flickity.min.css" rel="stylesheet">
-    <link id="StyleSheet" rel="stylesheet" href="CSS/Styles.css">
-    <link rel="stylesheet" href="CSS/all.min.css">
+    <link rel="stylesheet" href="CSS/Styles.css">
+    <link rel="preload" href="webfonts/fa-solid-900.woff2" as="font"> <!-- Link the Font Awesome font file with "preload" so that it is available sooner on loading the page -->
 </head>
 
 <body>
     <div class="sticky-top top-bar w-100 px-0">
+        <!-- The top bar containing the title, settings button, category selection and search alert -->
         <div class="row align-middle TopBarHeader px-0 mx-0">
+            <!-- Top bar containing title and settings button -->
             <div class="col-10 px-auto py-2">
-                <h1 class="text-center" id="TopMainTitle">RBVnews</h1>
+                <!-- Container for the title -->
+                <h1 class="text-center" id="TopMainTitle">RBVnews</h1> <!-- Title -->
             </div>
             <div class="col-2 px-2 py-2 d-flex align-items-middle">
+                <!-- Container for the settings button -->
                 <button onclick="OpenSettingsModal()" type="button" class="btn p-0" aria-label="Settings" aria-pressed="false" autocomplete="off">
-                    <i class="fas fa-sliders-h fa-2x" id="SettingsIcon"></i>
+                    <!-- The settings button with an onclick attribute to run the OpenSettingsModal JavaScript function -->
+                    <i class="fas fa-sliders-h fa-2x" id="SettingsIcon"></i> <!-- The icon to be shown on the button -->
                 </button>
             </div>
         </div>
         <div class="row NavBarSideScroll px-0 mx-0">
+            <!-- Div containing all elements of the category navigation -->
             <div id="NavCategoryScroll" class="carousel col-11 mx-auto my-1 pt-1">
-                <div class="carousel-cell"><b>Local</b></div>
+                <!-- Div containing all navigation cells -->
+                <div class="carousel-cell"><b>Local</b></div> <!-- All the cells for the carousel page navigation, waiting to be initialised using JQuery in main.js -->
                 <div class="carousel-cell"><b>Business</b></div>
                 <div class="carousel-cell"><b>Entertainment</b></div>
                 <div class="carousel-cell"><b>Health</b></div>
@@ -50,28 +68,32 @@
             </div>
         </div>
         <div class="row py-2 alert alert-info px-1" id="SearchActive" hidden>
+            <!-- Div containing the search alert -->
             <div class="col-11 text-center px-0">
-                <h5 class="m-auto">
-                    Searching
-                </h5>
+                <!-- Container for text on alert -->
+                <h5 class="m-auto">Searching</h5> <!-- Text in the alert -->
             </div>
             <div class="col-1 text-center">
-                    <i class="fas fa-times-circle close" aria-label="Close Search Alert" onclick="CloseSearchAlert()"></i>
+                <!-- Container for close button -->
+                <i class="fas fa-times-circle close" aria-label="Close Search Alert" onclick="CloseSearchAlert()"></i> <!-- On click of icon, close the alert -->
             </div>
         </div>
     </div>
-    <!-- Initial Country Select Modal -->
     <div id="InitCountrySelectModal" class="Initmodal modal">
-        <!-- Modal content -->
+        <!-- The whole initial modal -->
         <div class="Initmodal-content modal-content fixed-bottom">
+            <!-- The content of the initial modal -->
             <div class="modal-header Initmodal-header">
-                <h3 class="mx-auto my-auto"><b>Welcome!</b></h3>
-                <span id="InitCloseSpan" class="Initclose"><i class="fas fa-times-circle"></i></span>
+                <!-- The header of the content of the initial modal -->
+                <h3 class="mx-auto my-auto"><b>Welcome!</b></h3> <!-- The text in the header of the initial modal -->
+                <span id="InitCloseSpan" class="Initclose"><i class="fas fa-times-circle"></i></span> <!-- The close button for the header of the initial modal -->
             </div>
             <div class="modal-body Initmodal-body">
-                <label for="InitCountrySelect">Please select your Country of interest:</label>
+                <!-- The body of the initial modal -->
+                <label for="InitCountrySelect">Please select your Country of interest:</label> <!-- The label for the Country select -->
                 <select class="form-control form-control-lg custom-select" id="InitCountrySelect">
-                    <option value="ar">Argentina</option>
+                    <!-- The Country select element -->
+                    <option value="ar">Argentina</option> <!-- All of the options availabe with the corresponding values -->
                     <option value="au">Australia</option>
                     <option value="at">Austria</option>
                     <option value="be">Belgium</option>
@@ -122,15 +144,16 @@
                     <option value="tr">Turkey</option>
                     <option value="ua">Ukraine</option>
                     <option value="ae">United Arab Emirates</option>
-                    <option value="gb" selected>United Kingdom</option>
+                    <option value="gb" selected>United Kingdom</option> <!-- Selected by default -->
                     <option value="us">United States of America</option>
                     <option value="ve">Venezuela</option>
                 </select>
-                <label for="InitLanguageSelect">Please select your Chosen Language:</label>
+                <label for="InitLanguageSelect">Please select your Chosen Language:</label> <!-- The label for the language select -->
                 <select class="form-control form-control-lg custom-select" id="InitLanguageSelect">
-                    <option value="ar">Arabic</option>
+                    <!-- The language select element -->
+                    <option value="ar">Arabic</option> <!-- All of the options available with the corresponding values -->
                     <option value="de">German</option>
-                    <option value="en" selected>English</option>
+                    <option value="en" selected>English</option> <!-- Selected by default -->
                     <option value="es">Spanish</option>
                     <option value="fr">French</option>
                     <option value="it">Italian</option>
@@ -140,15 +163,17 @@
                     <option value="ru">Russian</option>
                     <option value="se">Swedish</option>
                 </select>
-                <p class="text-muted font-weight-light" id="SubInitText">These can be changed at any time in the settings menu</p>
+                <p class="text-muted font-weight-light" id="SubInitText">These can be changed at any time in the settings menu</p> <!-- Sub text at the bottom of the intial modal to inform the users -->
             </div>
             <div class="modal-footer Initmodal-footer">
-                <button type="button" class="btn btn-outline-light" id="InitmodalSubmit" onclick="InitSelectLang();">Submit</button>
+                <!-- The footer of the modal -->
+                <button type="button" class="btn btn-outline-light" id="InitmodalSubmit" onclick="InitSelectLang();">Submit</button> <!-- A button to submit the selected options -->
             </div>
         </div>
     </div>
 
     <div id="Main" class="container-fluid my-2">
+        <!-- Main div of the page -->
         <div id="SettingsModal" class="modal w-100">
             <div class="modal-content SettingsModal-content">
                 <div class="modal-body SettingsModal-body p-0">
@@ -157,40 +182,44 @@
                             <div class="card-header" id="AcordianSearchHeader">
                                 <h2 class="mb-0">
                                     <button id="SettingsModalTitleOne" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <!-- The button that is the title of the header of this part of the accordian -->
                                         Search for Articles
                                     </button>
                                 </h2>
                             </div>
 
                             <div id="collapseOne" class="collapse show" aria-labelledby="AcordianSearchHeader" data-parent="#FullAcordian">
+                                <!-- The first section of the accordian -->
                                 <div class="card-body">
+                                    <!-- The body of the settings modal containing the search options -->
                                     <div class="col-12 row">
-                                        <label for="SearchBar">Search:</label>
-                                        <input type="text" id="SearchBar" class="form-control" placeholder="Search Here!">
+                                        <label for="SearchBar">Search:</label> <!-- The label for the input -->
+                                        <input type="text" id="SearchBar" class="form-control" placeholder="Search Here!"> <!-- The input for the search term -->
                                         <div id="DateSearchError" class="invalid-feedback">
                                             Please enter a search term
                                         </div>
                                     </div>
                                     <div class="col-12 row">
                                         <div class="col-12 col-sm-6 px-0 pr-sm-2">
-                                            <label for="DateFrom">Date From:</label>
-                                            <input id="SearchDateFrom" class="form-control" type="date">
+                                            <label for="DateFrom">Date From:</label> <!-- The label for the input -->
+                                            <input id="SearchDateFrom" class="form-control" type="date"> <!-- The input for the intial date -->
                                             <div id="DateFromError" class="invalid-feedback">
                                                 Date out of range
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6 px-0 pl-sm-2">
-                                            <label for="DateTo">Date To:</label>
-                                            <input id="SearchDateTo" class="form-control" type="date">
+                                            <label for="DateTo">Date To:</label> <!-- The label for the input -->
+                                            <input id="SearchDateTo" class="form-control" type="date"> <!-- The input for the final date -->
                                             <div id="DateToError" class="invalid-feedback">
                                                 Date out of range
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 row">
-                                        <label for="SettingsLangSelect">Language:</label>
+                                        <label for="SettingsLangSelect">Language:</label> <!-- The label for the input -->
                                         <select class="form-control form-control-lg custom-select" id="SearchLangSelect">
-                                            <option value="ar">Arabic</option>
+                                            <!-- The select for the chosen language -->
+                                            <option value="ar">Arabic</option> <!-- Options for the select with the corresponding values -->
                                             <option value="de">German</option>
                                             <option value="en">English</option>
                                             <option value="es">Spanish</option>
@@ -205,9 +234,10 @@
                                     </div>
                                     <div class="col-12 row">
                                         <div class="col-12 px-0">
-                                            <label for="SearchSort">Sort by:</label>
+                                            <label for="SearchSort">Sort by:</label> <!-- The label for the input -->
                                         </div>
                                         <select class="form-control form-control-lg custom-select" id="SearchSort">
+                                            <!-- The select to organise the order of the results -->
                                             <option value="publishedAt">Newest</option>
                                             <option value="relevancy">Most Relevant</option>
                                             <option value="popularity">Most Popular</option>
@@ -215,10 +245,10 @@
                                     </div>
                                     <div class="col-12 row mt-2">
                                         <div class="col text-center">
-                                            <button class="mx-auto btn SettingsModalClose" type="button" onclick="CloseSettingsModal()">Cancel</button>
+                                            <button class="mx-auto btn SettingsModalClose" type="button" onclick="CloseSettingsModal()">Cancel</button> <!-- The button to close the settings modal -->
                                         </div>
                                         <div class="col text-center">
-                                            <button class="mx-auto btn SettingsModalSubmit" type="button" onclick="FilterSubmit()">Search!</button>
+                                            <button class="mx-auto btn SettingsModalSubmit" type="button" onclick="FilterSubmit()">Search!</button><!-- The button to submit the search terms -->
                                         </div>
                                     </div>
                                 </div>
@@ -228,6 +258,7 @@
                             <div class="card-header" id="AcordianSettingsHeader">
                                 <h2 class="mb-0">
                                     <button id="SettingsModalTitleTwo" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <!-- The button that is the title of the header of this part of the accordian -->
                                         Settings
                                     </button>
                                 </h2>
@@ -235,9 +266,10 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="AcordianSettingsHeader" data-parent="#FullAcordian">
                                 <div class="card-body row">
                                     <div class="col-12 row">
-                                        <label for="SettingsCountrySelect">Please choose your Country of interest:</label>
+                                        <label for="SettingsCountrySelect">Please choose your Country of interest:</label> <!-- The label for the input -->
                                         <select class="form-control form-control-lg custom-select" id="SettingsCountrySelect">
-                                            <option value="ar">Argentina</option>
+                                            <!-- The select to choose the default Country -->
+                                            <option value="ar">Argentina</option> <!-- Options for the select with the corresponding values -->
                                             <option value="au">Australia</option>
                                             <option value="at">Austria</option>
                                             <option value="be">Belgium</option>
@@ -294,9 +326,10 @@
                                         </select>
                                     </div>
                                     <div class="col-12 row">
-                                        <label for="SettingsLangSelect">Please choose your Language of choice:</label>
+                                        <label for="SettingsLangSelect">Please choose your Language of choice:</label> <!-- The label for the input -->
                                         <select class="form-control form-control-lg custom-select" id="SettingsLangSelect">
-                                            <option value="ar">Arabic</option>
+                                            <!-- The select to choose the default language -->
+                                            <option value="ar">Arabic</option> <!-- Options for the select with the corresponding values -->
                                             <option value="de">German</option>
                                             <option value="en">English</option>
                                             <option value="es">Spanish</option>
@@ -311,11 +344,11 @@
                                     </div>
                                     <div class="col-12 row">
                                         <div class="col-12">
-                                            <label for="SettingsColourSelect">Which colour do you choose?</label>
+                                            <label for="SettingsColourSelect">Which colour do you choose?</label> <!-- The label for the input -->
                                         </div>
                                         <div class="col-12 row">
                                             <div class="col-4 m-auto px-auto">
-                                                <input id="SettingsColourRadio1" type="radio" name="ColourSelect" value="1"><i id="ColourOption1" class="fas fa-circle ColourOption"></i>
+                                                <input id="SettingsColourRadio1" type="radio" name="ColourSelect" value="1"><i id="ColourOption1" class="fas fa-circle ColourOption"></i> <!-- Radio buttons to choose which theme users want -->
                                             </div>
                                             <div class="col-4 m-auto px-auto">
                                                 <input id="SettingsColourRadio2" type="radio" name="ColourSelect" value="2"><i id="ColourOption2" class="fas fa-circle ColourOption"></i>
@@ -335,16 +368,16 @@
                                         </div>
                                     </div>
                                     <div class="col-12 row">
-                                        <label for="SettingsPageSizeSelect8">How many articles per page?</label>
-                                        <input type="range" min="1" max="50" class="form-control slider" id="SettingsPageSizeSlider">
-                                        <p>Value: <span id="SettingsPageSizeDisplay"></span></p>
+                                        <label for="SettingsPageSizeSelect8">How many articles per page?</label> <!-- The label for the input -->
+                                        <input type="range" min="1" max="50" class="form-control slider" id="SettingsPageSizeSlider"> <!-- The slider to determine the number of articles desired per page -->
+                                        <p>Value: <span id="SettingsPageSizeDisplay"></span></p> <!-- A p tag to display the current value of the slider -->
                                     </div>
                                     <div class="col-12 row">
                                         <div class="col text-center">
-                                            <button type="button" class="btn SettingsModalClose" onclick="CloseSettingsModal()">Close</button>
+                                            <button type="button" class="btn SettingsModalClose" onclick="CloseSettingsModal()">Close</button> <!-- The button to close the settings modal -->
                                         </div>
                                         <div class="col text-center">
-                                            <button type="button" class="btn SettingsModalSubmit" onclick="SettingsSubmit()">Save</button>
+                                            <button type="button" class="btn SettingsModalSubmit" onclick="SettingsSubmit()">Save</button> <!-- The button to save the settings from the settings modal -->
                                         </div>
                                     </div>
                                 </div>
@@ -354,68 +387,76 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="ArticleModal" class="modal">
+            <!-- The modal containing the full size article -->
             <div class="modal-content ArticleModal-content">
+                <!-- The content of the modal -->
                 <div class="modal-header p-0 ArticleModal-header">
-                    <img class="img-fluid" id="ArticleModalImage" onerror="CheckImage(this)">
+                    <!-- The modal header -->
+                    <img class="img-fluid" id="ArticleModalImage" onerror="CheckImage(this)"> <!-- The image with an onerror function to check the image and replace it with the placeholder if needed -->
                 </div>
                 <div class="modal-body ArticleModal-body px-4">
+                    <!-- The body of the modal -->
                     <div class="row">
+                        <!-- A row -->
                         <div class="col-12 px-0">
-                            <h6 class="text-muted" id="ArticleModalSource"></h6>
+                            <!-- A div the full width of the row -->
+                            <h6 class="text-muted" id="ArticleModalSource"></h6> <!-- The source of the article with muted text -->
                         </div>
                         <div class="col-12 px-0">
-                            <h6 class="text-muted" id="ArticleModalDate"></h6>
+                            <!-- A div the full width of the row -->
+                            <h6 class="text-muted" id="ArticleModalDate"></h6> <!-- The date of the article with muted text -->
                         </div>
                     </div>
                     <div class="row">
-                        <h3 class="" id="ArticleModalTitle"></h3>
+                        <!-- Seperate row to line break and space from other elements -->
+                        <h3 id="ArticleModalTitle"></h3> <!-- The header tags waiting for the title to be inserted from the selected article -->
                     </div>
                     <div class="row">
-                        <h6 class="" id="ArticleModalDesc"></h6>
+                        <!-- Seperate row to line break and space from other elements -->
+                        <h6 id="ArticleModalDesc"></h6> <!-- The header tags waiting for the description to be inserted from the selected article -->
                     </div>
                 </div>
                 <div class="modal-footer ArticleModal-footer">
-                    <button class="button btn btn-default" id="ArticleModalMore">Read More</button>
-                    <button class="btn btn-default" id="ArticleModalClose" onclick="ArticleModalClose();">Close</button>
+                    <!-- The footer of the modal -->
+                    <button class="button btn btn-default" id="ArticleModalMore">Read More</button> <!-- The button to read more about the articel, JavaScript sets the onclick event to run a JS function that opens the link in a new tab -->
+                    <button class="btn btn-default" id="ArticleModalClose" onclick="ArticleModalClose();">Close</button> <!-- The button to close the article and return to viewing the lists of articles -->
                 </div>
             </div>
         </div>
 
         <div class="row my-3" id="ArticleOutput">
+            <!-- A div waiting for JavaScript to add the article cards for display -->
         </div>
 
         <div id="Pagination" class="mt-2">
+            <!-- The page navigation containing div -->
             <nav aria-label="Page navigation">
+                <!-- The navigation element with a label to help accesability -->
                 <ul id="PageNavBar" class="pagination justify-content-center">
+                    <!-- An unorganised list to be filled with list items from JavaScript for page navigation -->
 
                 </ul>
             </nav>
         </div>
         <div id="DisplayError" class="row my-3 mx-auto" hidden>
+            <!-- A div to show that there are no stored articles and an internet connection error -->
             <div class="card col-10 mx-auto text-center alert-danger NetWarning">
                 <h3>No stored articles for this category!</h3>
                 <h6>Please try a different category or reload when there is an internet connection.</h6>
             </div>
         </div>
         <div id="IntError" class="fixed-bottom alert-danger text-center NetWarning px-1" hidden>
+            <!-- A bar fixed to the bottom of the screen to show there is an internet connection error -->
             <h4>Connection Error!</h4>
         </div>
     </div>
-    <script src="JS/index.umd.min.js"></script> <!-- Pull to refresh -->
-    <script src="JS/popper.min.js"></script> <!-- Popper JS -->
-    <script src="JS/jquery-3.4.1.min.js"></script><!-- JQuery -->
-    <script src="JS/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS Bundle -->
-    <script src="JS/flickity.pkgd.min.js"></script> <!-- Flickity JS -->
-    <script src="JS/main.js"></script> <!-- Custom JS -->
-    <script>
-        /* global PullToRefresh */
-        PullToRefresh.init({
-            mainElement: '#ArticleOutput',
-            onRefresh: function() {
-                RefreshArticles(1);
-            }
-        });
-    </script>
-</body></html>
+<script src="JS/index.umd.min.js"></script> <!-- Pull to refresh -->
+<script src="JS/popper.min.js"></script> <!-- Popper JS -->
+<script src="JS/jquery-3.4.1.min.js"></script><!-- JQuery -->
+<script src="JS/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS Bundle -->
+<script src="JS/flickity.pkgd.min.js"></script> <!-- Flickity JS -->
+<script src="JS/main.js"></script> <!-- Custom JS -->
+</body>
+</html>

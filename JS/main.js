@@ -9,8 +9,8 @@ var ReturnedDataPage; // Declare this variable globally to store the page number
 var ScrollTop; // Store the current height of the scroll of the page before the article modal is opened, for use to scroll back to current position on article modal close
 var Categories = ["Local", "Business", "Entertainment", "Health", "Science", "Sports", "Technology"]; // An array with the name of each category
 /* A function to run when the DOM content is loaded to set up all intial settings and elements */
-document.addEventListener('DOMContentLoaded',
-    (function () {
+document.addEventListener('DOMContentLoaded', // When the DOMContentLoaded event happens, run...
+    (function () { // Run as a function
         var Cat = parseInt(sessionStorage.getItem("Category")); // Retrieve the Category variable from session storage and store it as an integer
         if (isNaN(Cat) || ((Cat < 0 || Cat >= Categories.length))) { // Check that the sessionStorage category is an int and that it is in range
             sessionStorage.setItem("Category", 0); // If not then set session storage Category to 0
@@ -34,15 +34,22 @@ document.addEventListener('DOMContentLoaded',
     })
 );
 /* If the service worker exists, register it */
-window.onload = function () {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-            .register('sw.js')
-            .then(function () {
-                console.log("Service Worker Registered");
+window.onload = function () { // When the window is loaded, run...
+    if ('serviceWorker' in navigator) { // If there is a service worker in navigator
+        navigator.serviceWorker // use the service worker class
+            .register('sw.js') // Register the service worker file
+            .then(function () { // The run
+                console.log("Service Worker Registered"); // Log that the service worker has been registered
             });
     }
 };
+/* global PullToRefresh */
+PullToRefresh.init({ // Initialise the pull to refresh
+    mainElement: '#ArticleOutput', // Set the target element to that which the articles are being displayed in
+    onRefresh: function () { // On the refresh from pulling down
+        RefreshArticles(1); // Run the JS function to refresh and then display the articles
+    }
+});
 /* A function to format todays date so it can be compared to the input from the form */
 function FilterFormatDate() {
     var d = new Date(), // Create a new date variable
@@ -69,62 +76,62 @@ function CloseSearchAlert() {
     RemoveSearchCell(); // Run the funtion to remove the Search cell in the navigation bar
     RefreshArticles(1); // Run the function to refresh the articles (without the serach variables)
 }
-var VarName = ['Main', 'MainShade1', 'MainShade2', 'Secondary', 'SecondaryShade1', 'SecondaryShade2', 'Light', 'Dark'];
-var Style1 = ['163F58', '00677D', '394855', 'F5B51B', 'f7ca5d', 'C58C00', 'FFFFFF', '000000'];
+var VarName = ['Main', 'MainShade1', 'MainShade2', 'Secondary', 'SecondaryShade1', 'SecondaryShade2', 'Light', 'Dark']; // An array containing all of the variable names from the CSS
+var Style1 = ['163F58', '00677D', '394855', 'F5B51B', 'f7ca5d', 'C58C00', 'FFFFFF', '000000']; // An array containing the values for the variables for each theme
 var Style2 = ['F5A21C', 'FFDC5C', 'BD7300', '030F4F', '030F4F', '484554', 'FFFFFF', '000000'];
 var Style3 = ['e51c1c', 'ca0c0c', 'da5151', '31c0b9', '0d928c', '4ad7d0', 'FFFFFF', '000000'];
 var Style4 = ['7EDEC2', '5FBFB6', '98B0A8', '200371', '0094CF', '4B4453', '000000', 'FFFFFF'];
 var Style5 = ['200371', '0094CF', '4B4453', '7EDEC2', '5FBFB6', '98B0A8', '000000', 'FFFFFF'];
-var Style6 = ['5F011F', '8C3242', '554149', '00DBDA', '95B1B0', '44E6CE', 'FFFFFF', '000000'];
+var Style6 = ['5F011F', '8C3242', '554149', '00DBDA', '95B1B0', '44E6CE', 'FFFFFF', '000000']; // These are stored globally so that they do not need to be created each time the function is run
 /* Update the colour css file */
 function ColourStyle() {
     var StoredColour = parseInt(localStorage.getItem("Colour")); // Store the local storage Colour variable as an int
     var Colour = ((isNaN(StoredColour)) || ((StoredColour > 6) || (StoredColour < 1))) ? "1" : StoredColour; // If the StoredColour is NotANumber or outside of the range of options then use 1, other wise use the integer
-    var ChosenStyle = Style1;
-    switch (Colour) {
-        case 1:
-            ChosenStyle = Style1;
-            break;
-        case 2:
-            ChosenStyle = Style2;
-            break;
-        case 3:
-            ChosenStyle = Style3;
-            break;
-        case 4:
-            ChosenStyle = Style4;
-            break;
-        case 5:
-            ChosenStyle = Style5;
-            break;
-        case 6:
-            ChosenStyle = Style6;
-            break;
+    var ChosenStyle = Style1; // Store the initial theme in the chosen theme variable
+    switch (Colour) { // A switch statement run againt the value of the Colour variable
+        case 1: // If Colour is 1 then...
+            ChosenStyle = Style1; // Store the chosen theme variables in the ChosenStyle variable
+            break; // Finish this case statement
+        case 2: // If Colour is 2 then...
+            ChosenStyle = Style2; // Store the chosen theme variables in the ChosenStyle variable
+            break; // Finish this case statement
+        case 3: // If Colour is 3 then...
+            ChosenStyle = Style3; // Store the chosen theme variables in the ChosenStyle variable
+            break; // Finish this case statement
+        case 4: // If Colour is 4 then...
+            ChosenStyle = Style4; // Store the chosen theme variables in the ChosenStyle variable
+            break; // Finish this case statement
+        case 5: // If Colour is 5 then...
+            ChosenStyle = Style5; // Store the chosen theme variables in the ChosenStyle variable
+            break; // Finish this case statement
+        case 6: // If Colour is 6 then...
+            ChosenStyle = Style6; // Store the chosen theme variables in the ChosenStyle variable
+            break; // Finish this case statement
     }
-            var i = 0;
-            VarName.forEach(function (value, index) {
-                document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]);
-            });
-            var StyleSheet = document.getElementById("StyleSheet"); // Store the stylesheet element
-            StyleSheet.setAttribute("href", "CSS/Styles.css"); // Set the stylesheet href to the stored variable
+    var i = 0; // Set i to 0 initially
+    VarName.forEach(function (value, index) { // For each variable in the array (each CSS variable)
+        document.querySelector(":root").style.setProperty("--" + value, "#" + ChosenStyle[index]); // Set each variable in css to the corresponding value (Variables start with '--' and values with '#')
+    });
+    var StyleSheet = document.getElementById("StyleSheet"); // Store the stylesheet element
+    StyleSheet.setAttribute("href", "CSS/Styles.css"); // Set the stylesheet href to the stored variable
 }
-/*  */
+/* Show the error for the case of no articles being available */
 function ShowDisplayError() {
     document.getElementById("DisplayError").removeAttribute("hidden"); // Remove the hidden attribute from the placeholder element
 }
-
+/* Hide the error for the case of no articles being available */
 function HideDisplayError() {
     document.getElementById("DisplayError").setAttribute("hidden", "true"); // Add the hidden attribute to the placeholder element with the value true
 }
-/*  */
+/* Show the error alert for the request failing due to internet errors */
 function ShowIntErrorMessage() {
-    document.getElementById("Main").classList.add("mb-5");
+    document.getElementById("Main").classList.add("mb-5"); // Add margin to the bottom of the Main to make space for the internet alert
     document.getElementById("IntError").removeAttribute("hidden"); // Remove the hidden attribute from the message element
 }
 
 function HideIntErrorMessage() {
     document.getElementById("IntError").setAttribute("hidden", "true"); // Add the hidden attribute to the message element with the value true
-    document.getElementById("Main").classList.remove("mb-5");
+    document.getElementById("Main").classList.remove("mb-5"); // Remove margin from the bottom by removing the class attribute
 }
 /* Open the initial modal for first time use */
 function OpenInitCountryModal() {
@@ -160,6 +167,7 @@ function ShowCards() {
 function OpenSettingsModal() {
     ArticleModalClose(); // Run the function to close the article modal (incase it is open)
     HideCards(); // Run the function to hide the article cards
+    HideDisplayError(); // Run the function to hide the article load error message
     LoadStoredSettings(); // Run the function to load all stored settings and search terms
     var Settings = document.getElementById("SettingsModal"); // Store the element for the settings modal
     Settings.style.display = "block"; // Change the display attribute to show the modal
@@ -343,11 +351,14 @@ function FormatDate(Input) {
 function OutputResults(Data) {
     var PageLimit = Data.articles.length < localStorage.getItem("PageSize") ? Data.articles.length : localStorage.getItem("PageSize"); // Store the lowest between the returned amount and page size
     for (i = 0; i < PageLimit; i++) { // For each number up to the Page Limit
-
         var Title = (Data.articles[i].title == null || Data.articles[i].title == "") ? 'Unknown' : Data.articles[i].title; // For each piece of data check it is not null or empty ("") and if so output as 'Unknown' or the replacement image, if not then run the format function if needed and store the required data
         var Source = (Data.articles[i].source.name == null || Data.articles[i].source.name == "") ? 'Unknown' : Data.articles[i].source.name;
         var Date = (Data.articles[i].publishedAt == null || Data.articles[i].publishedAt == "") ? 'Unknown' : FormatDate(Data.articles[i].publishedAt); // If not null, run the function to format the output of the date
         var ImageURL = (Data.articles[i].urlToImage == null || Data.articles[i].urlToImage == "") ? 'Images/TempImage.png' : Data.articles[i].urlToImage; // If not null run the function to check the image can load
+        var tempImageURL = ImageURL.split(":", 2); // Split the url by ':' into 2 parts and store them
+        if (tempImageURL[0] == "http") { // If the first part is "http"
+            ImageURL = "https:" + tempImageURL[1]; // Save ImageURL as "https:" followed by the rest of the link (the ":" replaces the one removed by the split)
+        }
         OutputArea.insertAdjacentHTML('beforeend', '<div class="card col-5 px-0 mx-auto my-1 ArticleCard" onclick="ArticleModalOpen(' + i + ')"><img class="card-img-top" src="' + ImageURL + '" alt="Article Image" onerror="CheckImage(this);"><div class="ArticleCardBody card-body p-2"><div class="ArticleTitle text-wrap font-weight-bold">' + Title + '</div></div><div class="ArticleCardFoot card-footer p-2"><div class="ArticleSource text-wrap">' + Source + '</div><div class="ArticleDate text-wrap">' + Date + '</div></div></div>'); // Add this html onto the end of what is already in the OutputArea div
     };
 }
@@ -361,8 +372,8 @@ function GetCategory(i) {
 }
 /* News API GET request with required elements */
 function RetrieveNews(Page, Live, callback) {
-    if (Live == 0) {
-        callback();
+    if (Live == 0) { // If the given variable Live is 0
+        callback(); // End the function and run the callback function
     }
     var Category = sessionStorage.getItem("Category") == null ? "" : GetCategory(sessionStorage.getItem("Category")); // Retrieve the category from the local storage
     SelectedCountry = localStorage.getItem("Country") == null ? "gb" : localStorage.getItem("Country"); // Retrieve the Country from the local storage
@@ -395,15 +406,15 @@ function RetrieveNews(Page, Live, callback) {
     }
     NewsRequest.open('GET', APIRequestURL, true); // Open the API request with the method GET and the prepared string
     NewsRequest.send(); // Send the API request
-    NewsRequest.onerror = function () {
-        console.log("Article retrieval failed - No Internet Connection.");
+    NewsRequest.onerror = function () { // If there is an error in the NewsRequest XMLHttp request
+        console.log("Article retrieval failed - No Internet Connection."); // Log that there is an error
         if (ReturnedData !== undefined && Category == ReturnedDataCategory) { // If there is stored data in ReturnedData and it is for the current category
             if (Page == ReturnedDataPage) { // If this is the stored page
-                console.log("Show Stored Articles");
+                console.log("Show Stored Articles"); // Log that the stored articles are being shown
                 HideDisplayError(); // Hide the placeholder
                 callback(); // Run the callback to output the articles
             } else { // If this is not the stored page
-                console.log("Page Out Of Reach");
+                console.log("Page Out Of Reach"); // Log that the current page is out of reach
                 RefreshArticles(ReturnedDataPage); // Run the RefreshArticles function again, but on the correct page
             }
         } else { // If this is not the stored category or there is no stored data in ReturnedData
@@ -417,7 +428,7 @@ function RetrieveNews(Page, Live, callback) {
 function RefreshArticles(Page) {
     var OutputArea = document.getElementById("ArticleOutput"); // Declare and store the element for articles to be in
     OutputArea.innerHTML = ""; // Clear the area for articles
-    RetrieveNews(Page, 1, // Retrieve the articles based on the SelectedCountry
+    RetrieveNews(Page, 1, // Retrieve the articles based on the SelectedCountry and with the live variable
         function () { // Wait for a callback from the retrieve
             OutputResults(ReturnedData) // Output the results (Waiting means the results are returned and stored before being output to avoid errors)
         });
@@ -513,8 +524,8 @@ function InitialiseCatSelection() {
     var NavBarCarousel = $carousel.data('flickity'); // Store the data value into a variable
 
     NavBarCarousel.on('change', function (index) { // On the carousel value change 
-        CloseSettingsModal();
-        ArticleModalClose();
+        CloseSettingsModal(); // Close the settings modal if it is open
+        ArticleModalClose(); // Close the article modal if it is open
         sessionStorage.setItem("Category", index); // Set the session storage variable to the new cell
         if ((sessionStorage.getItem("Searching") == 'true') && (NavBarCarousel.selectedElement.id !== 'SearchCell')) { // If searching is true and the selected cell is not the Search cell
             CloseSearchAlert(); // Close the Search alert

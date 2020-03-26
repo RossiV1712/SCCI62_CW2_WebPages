@@ -1,253 +1,327 @@
-@import url('SigmarOne.css');
+@import('SigmarOne.css');
 
-/* Initial Country Modal full CSS */
+/* Import the Font Awesome font from the local file  */
+@font-face {
+    font-family: "FontAwesome";
+    /* The name of the font for use in the application */
+    font-style: normal;
+    /* The chosen style of the font */
+    font-weight: 900;
+    /* The chosen weight of the font */
+    src: url(../webfonts/fa-solid-900.woff2) format('woff2');
+    /* The link to the font file and the format it is in */
+    font-display: swap;
+    /* To stop the FOIT (flash of invisible text) issue */
+}
+
+/* Taken from the Font Awesome JS file -- Only this was used wasting a lot of resources and increasing loading times */
+.fa-sliders-h:before {
+    content: "\f1de";
+    /* Insert the contents into the element */
+}
+
+.fa-times-circle:before {
+    content: "\f057";
+    /* Insert the contents into the element */
+}
+
+.fa-circle:before {
+    content: "\f111";
+    /* Insert the contents into the element */
+}
+
+.fa-2x {
+    font-size: 2em;
+    /* Set the font size of the elements to 2em */
+}
+
+.fas {
+    font-family: FontAwesome;
+    /* Set the font family of the text */
+    -moz-osx-font-smoothing: grayscale;
+    /* add font smoothing if moz rendering engine is available */
+    -webkit-font-smoothing: antialiased;
+    /* Add font smoothing if webkit rendering engine is available */
+    display: inline-block;
+    /* Set the display to */
+    font-style: normal;
+    /* Set the font style to normal */
+    font-variant: normal;
+    /* Set the font variant to normal */
+    text-rendering: auto;
+    /* render the text with automatic settings */
+    line-height: 1;
+    /* Set the line height of the elements to 1 */
+}
+
+/* CUSTOM CSS */
+/* Initial Country Modal */
 /* The Modal (background) */
 .Initmodal {
     display: none;
-    /* Hidden by default */
+    /* Set to hidden by default */
     position: fixed;
-    /* Stay in place */
+    /* Stay in place on the page */
     z-index: 5;
-    /* Sit on top */
+    /* On top of other elements */
     left: 0;
+    /* No margin to the left */
     bottom: 0;
+    /* No space underneath */
     width: 100%;
-    /* Full width */
+    /* Full width of the parent element (body) */
     height: 100%;
-    /* Full height */
+    /* Full height of the element */
     overflow: auto;
-    /* Enable scroll if needed */
+    /* If scroll is needed then enable scroll */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
+    /* Fallback background colour if rgba is not possible/supported */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
+    /* Background colour with 40% opacity */
     -webkit-animation-name: fadeIn;
     /* Fade in the background */
     -webkit-animation-duration: 0.4s;
+    /* Duration of the fade */
     animation-name: fadeIn;
+    /* Fallback if -webkit- is unavailable */
     animation-duration: 0.4s
+        /* Fallback if -webkit- is unavailable */
 }
 
 /* Modal Content */
 .Initmodal-content {
     position: fixed;
+    /* Stay in place on the page */
     bottom: 0px;
-    background-color: #fefefe;
+    /* No space underneath */
     width: 100%;
+    /* Full width of the parent element (body) */
     -webkit-animation-name: slideIn;
+    /* [For Safari] Slide in from the bottom of the screen */
     -webkit-animation-duration: 0.4s;
+    /* [For Safari] Duration of the slide */
     animation-name: slideIn;
+    /* Fallback if -webkit- is unavailable */
     animation-duration: 0.4s
+        /* Fallback if -webkit- is unavailable */
 }
 
 /* The Close Button */
 .Initclose {
     float: right;
+    /* Float to the right of the screen */
     font-size: 28px;
+    /* Set the size of the font */
     font-weight: bold;
+    /* Set the font weight to bold */
 }
 
-.Initclose:hover,
-.Initclose:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.Initmodal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-.Initmodal-body {
-    padding: 2px 16px;
-}
-
+/*  */
+.Initmodal-header,
+.Initmodal-body,
 .Initmodal-footer {
     padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
+    /* Add 16px padding to the sides and 2px to the top and bottom of the divs */
 }
 
 /* Add Animation */
 @-webkit-keyframes slideIn {
+
+    /* Animation if webkit is available */
     from {
+        /* Start of animation */
         bottom: -300px;
+        /* Initial space at the bottom of the element */
         opacity: 0
+            /* Initial opacity */
     }
 
     to {
+        /* End of animation */
         bottom: 0px;
+        /* Final space at the bottom of the element */
         opacity: 1
+            /* Final opacity */
     }
 }
 
 @keyframes slideIn {
+
+    /* Fallback if webkit is not available */
     from {
+        /* Start of animation */
         bottom: -300px;
+        /* Initial space at the bottom of the element */
         opacity: 0
+            /* Initial opacity */
     }
 
     to {
+        /* End of animation */
         bottom: 0px;
+        /* Final space at the bottom of the element */
         opacity: 1
+            /* Final opacity */
     }
 }
 
 @-webkit-keyframes fadeIn {
+
+    /* Animation if webkit is available */
     from {
+        /* Start of animation */
         opacity: 0
+            /* Initial opacity */
     }
 
     to {
+        /* End of animation */
         opacity: 1
+            /* Final opacity */
     }
 }
 
 @keyframes fadeIn {
+
+    /* Fallback if webkit is not available */
     from {
+        /* Start of animation */
         opacity: 0
+            /* Initial opacity */
     }
 
     to {
+        /* End of animation */
         opacity: 1
+            /* Final opacity */
     }
 }
 
 #SubInitText {
     font-size: 0.8rem;
-}
-
-.NavBar_Card {
-    display: contents;
-    font-size: 1.4rem;
-    scroll-snap-align: start;
-    width: 60%;
-}
-
-.card-text {
-    font-size: 0.8rem;
-}
-
-.ArticleCard {
-    border-radius: 4%;
+    /* Set the size of the text */
 }
 
 #TopMainTitle {
     font-family: 'Sigmar One', cursive;
-}
-
-.PageNumActive {
-    color: #007bff !important;
-    background-color: transparent;
-    background-image: none;
-    border-color: #007bff;
-    z-index: 2;
+    /* Set the font of the main title */
 }
 
 .TopBarHeader {
     border: solid 2px black;
+    /* Add a black 2px border to the element */
     border-bottom: 0;
+    /* Remove the border from the bottom, leaving only the outer edges of the page */
 }
 
 .NavBarSideScroll {
     width: 100vw;
+    /* Set the width of the element to the full width of the viewport */
     border: solid 2px black;
+    /* Add a black 2px border to the element */
     box-shadow: 0 5px 6px #000, 0 -5px 6px #000;
-}
-
-.NavBarInsideSideScroll::-webkit-scrollbar {
-    display: none;
-}
-
-#ArticleContainer {
-    height: 30vh;
+    /* Add box shadows to the top and bottom of the element with fading, creating the effect of this element being on top with a 3D feel */
 }
 
 .ArticleTitle {
     font-size: 0.8rem;
+    /* Set the default text size for the title of the article on the article cards */
 }
 
 .ArticleSource,
 .ArticleDate {
     font-size: 0.7rem;
+    /* Set the default text size for the sub text on the article cards */
 }
 
 #NavCategoryScroll {
     height: 8vh;
-    background-color: white;
+    /* Set the height of the element to 8% of the viewport height */
     overflow-x: hidden;
+    /* No scrolling sideways even if there is overflow */
     box-shadow: 25px 0 20px -20px #000 inset, -25px 0 20px -20px #000 inset;
+    /* Set the box shadow inside of the element with fade and black as the colour */
     border: solid 2px #000;
+    /* Add a border to the whole element */
 }
 
 .carousel-cell {
     padding-top: 1vh;
+    /* Set padding at the top of the element to 1% of the viewport height */
     width: 50%;
+    /* Set the element to 50% of the parent element */
     height: 6vh;
+    /* Set the height to 6% of the viewport height */
     margin-right: 10px;
+    /* Set the margin on the right to 10px */
     border-radius: 5px;
+    /* Set the border radius to 5px to curve the corners */
     font-size: 1rem;
+    /* Set the font size to 1rem */
     display: block;
+    /* Set the display method to block */
     text-align: center;
+    /* Align the text inside the element to the center */
 }
 
 /* cell number */
 .carousel-cell:before {
     display: block;
+    /* Set the display settings to block for the carousel cells */
     text-align: center;
+    /* Alight the text in the navigation cells to the center of the cell element */
     line-height: 200px;
+    /* Set the height of each line of text in the navigation cells */
     font-size: 800px;
-    color: white;
-}
-
-#ArticleModal {
-        position: unset!important;
-    max-height: 100%;
-}
-
-#SettingsModal {
-        position: unset!important;
-    max-height: 100%;
-}
-
-.SettingsModal-content {
-    border: 0;
+    /* Set the font size for the text in the navigation cells */
 }
 
 .ColourOption {
     font-size: 1.5rem;
+    /* Set the default size for the icons that display the colours for the theme options */
 }
 
 #ColourOption1 {
     color: #163F58;
+    /* Show the i tag as the corresponding colour for the theme */
 }
 
 #ColourOption2 {
     color: #F5A21C;
+    /* Show the i tag as the corresponding colour for the theme */
 }
 
 #ColourOption3 {
     color: #e51c1c;
+    /* Show the i tag as the corresponding colour for the theme */
 }
 
 #ColourOption4 {
     color: #7EDEC2;
+    /* Show the i tag as the corresponding colour for the theme */
 }
 
 #ColourOption5 {
     color: #200371;
+    /* Show the i tag as the corresponding colour for the theme */
 }
 
 #ColourOption6 {
     color: #5F011F;
+    /* Show the i tag as the corresponding colour for the theme */
+}
+
+.top-bar {
+    z-index: 4;
+    /* Set the z-index so that the element is on top of most, however underneath the modal overlay (which is set to z-index of 5) */
 }
 
 /* Colour Styles */
 /* General */
 :root {
+    /* Variables for use in setting colours */
     --Main: #163F58;
+    /* Default colours */
     --MainShade1: #00677D;
     --MainShade2: #394855;
     --Secondary: #F5B51B;
@@ -258,11 +332,12 @@
 }
 
 body {
-     background-color: var(--Secondary);
+    background-color: var(--Secondary);
 }
 
 /* Header */
-.TopBarHeader, #SettingsIcon {
+.TopBarHeader,
+#SettingsIcon {
     background-color: var(--Main);
     color: var(--Secondary);
 }
@@ -276,7 +351,7 @@ body {
 }
 
 .carousel-cell {
-    background-color: var(--MainShade1);
+    background-color: var(--Main);
     color: var(--Secondary);
     border: solid 3px #000000;
 }
@@ -299,8 +374,9 @@ body {
     color: var(--Light);
 }
 
-#ArticleModalSource, #ArticleModalDate {
-    color: var(--Secondary)!important;
+#ArticleModalSource,
+#ArticleModalDate {
+    color: var(--Secondary) !important;
 }
 
 .ArticleModal-footer {
@@ -336,21 +412,21 @@ body {
 
 .ArticleCardFoot {
     background-color: var(--MainShade1);
-    color: var(--SecondaryShade2)!important;
+    color: var(--SecondaryShade2) !important;
 }
 
 /* Page Navigation */
 .PageNumInactive {
     text-decoration: none;
     background-color: var(--Secondary);
-    color:  var(--Main)!important;
+    color: var(--Main) !important;
     border: solid 1px var(--Dark);
 }
 
 .PageNumActive {
     text-decoration: none;
-    background-color: var(--Main)!important;
-    color:  var(--Secondary)!important;
+    background-color: var(--Main) !important;
+    color: var(--Secondary) !important;
 }
 
 /* Configuration Modals Shared */
@@ -368,9 +444,29 @@ body {
     border: solid 2px var(--Dark);
 }
 
+#ArticleModal {
+    position: unset !important;
+    max-height: 100%;
+}
+
+#SettingsModal {
+    position: unset !important;
+    max-height: 100%;
+}
+
 #SettingsModalTitleOne,
 #SettingsModalTitleTwo {
     color: var(--Secondary);
+}
+
+#SettCardBot {
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+#SettCardTop {
+    border-top-right-radius: .25rem;
+    border-top-left-radius: .25rem;
 }
 
 #collapseOne,
@@ -433,10 +529,11 @@ body {
 }
 
 #SubInitText {
-    color: var(--MainShade2)!important;
+    color: var(--MainShade2) !important;
 }
 
-.Initmodal-header, .Initmodal-footer {
+.Initmodal-header,
+.Initmodal-footer {
     background-color: var(--Main);
     color: var(--Secondary);
 }
@@ -448,45 +545,24 @@ body {
 }
 
 .Initmodal-footer button {
-    background-color: var(--Secondary); /* ? */
+    background-color: var(--Secondary);
+    /* ? */
     color: var(--Main);
     border: solid 2px var(--Light);
 }
 
-/* Internet Error */
-
 /* Internet Warning Message */
-
-/* Search Alert */
-#SearchActive {
-    color: var(--Secondary)!important;
-    background-color: var(--Main);
-    border: solid 2px black;
-    border-top: 0;
-    box-shadow: 0 2px 5px #000;
-    border-radius: 0;
-}
-
-#SettCardBot {
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: .25rem;
-}
-
-#SettCardTop {
-    border-top-right-radius: .25rem;
-    border-top-left-radius: .25rem;
-}
-
 .NetWarning {
     border: 2px solid #721c24;
     height: auto;
 }
 
-.NetWarningPlaceHolder {
-    height: 5vh;
-    display: inline-block;
-}
-
-.top-bar {
-    z-index: 4;
+/* Search Alert */
+#SearchActive {
+    color: var(--Secondary) !important;
+    background-color: var(--Main);
+    border: solid 2px black;
+    border-top: 0;
+    box-shadow: 0 2px 5px #000;
+    border-radius: 0;
 }
