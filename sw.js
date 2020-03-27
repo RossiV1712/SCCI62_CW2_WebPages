@@ -27,8 +27,6 @@ var filesToCache = [ // List all of the files that need to be cached
     'webfonts/fa-solid-900.woff2',
     'mstile-150x150.png',
     'apple-touch-icon.png',
-    'android-chrome-192x192.png',
-    'android-chrome-512x512.png',
     'browserconfig.xml',
     'safari-pinned-tab.svg',
     'manifest.json'

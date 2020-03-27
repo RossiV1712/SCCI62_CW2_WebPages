@@ -347,6 +347,8 @@ function FormatDate(Input) {
 }
 /* Display the response from the request in the limits of the page size and format correctly */
 function OutputResults(Data) {
+    CloseSettingsModal();
+    ArticleModalClose();
     var PageLimit = Data.articles.length < localStorage.getItem("PageSize") ? Data.articles.length : localStorage.getItem("PageSize"); // Store the lowest between the returned amount and page size
     for (i = 0; i < PageLimit; i++) { // For each number up to the Page Limit
         var Title = (Data.articles[i].title == null || Data.articles[i].title == "") ? 'Unknown' : Data.articles[i].title; // For each piece of data check it is not null or empty ("") and if so output as 'Unknown' or the replacement image, if not then run the format function if needed and store the required data
